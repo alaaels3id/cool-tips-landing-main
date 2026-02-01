@@ -19,10 +19,10 @@ const NotFound = () => {
             404
           </h1>
           <div className="inline-block px-8 py-3 bg-foreground text-background font-bold text-xl uppercase tracking-widest rounded-full mb-12 shadow-tactile rotate-[-2deg]">
-            Oopsie! Page is Missing!
+            {t('not_found.badge')}
           </div>
           <p className="text-2xl md:text-3xl font-bold text-foreground/60 mb-12 max-w-lg mx-auto leading-tight">
-            Looks like this page went on a vacation or just doesn't want to be found right now!
+            {t('not_found.description')}
           </p>
           <Button 
             size="lg"
