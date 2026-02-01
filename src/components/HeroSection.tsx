@@ -4,135 +4,81 @@ import logo from "@/assets/logo.png";
 
 const HeroSection = () => {
   return (
-    <section className="relative min-h-[110vh] flex items-center justify-center overflow-hidden bg-background pt-20">
-      {/* Editorial Background Elements */}
-      <div className="absolute inset-0 z-0">
-        <div className="absolute top-[-10%] right-[-5%] text-[40rem] font-black text-primary/5 select-none pointer-events-none leading-none">
-          216
-        </div>
-        <div className="absolute bottom-[10%] left-[-5%] text-[20rem] font-black text-accent/5 select-none pointer-events-none leading-none rotate-12">
-          64
-        </div>
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-[120px] animate-pulse-slow" />
-        <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-accent/5 rounded-full blur-[150px] animate-pulse-slow" style={{ animationDelay: '2s' }} />
-      </div>
-
-      {/* Code background decoration */}
-      <div className="absolute right-0 top-0 h-full w-1/4 overflow-hidden opacity-[0.03] pointer-events-none border-l border-border hidden lg:block">
-        <div className="font-mono text-[10px] text-foreground animate-code-scroll whitespace-pre leading-none p-4">
-          {`// COOL TIPS SOURCE
-function masterLaravel() {
-  const roadmap = ['Basics', 'Eloquent', 'Architecture'];
-  return roadmap.reduce((acc, curr) => acc + ' > ' + curr);
-}
-
-class TechBrutalism {
-  constructor() {
-    this.aesthetic = 'High Contrast';
-    this.typography = 'Bricolage Grotesque';
-    this.speed = 'Extreme';
-  }
-}
-
-// Repeating for texture
-function masterLaravel() {
-  const roadmap = ['Basics', 'Eloquent', 'Architecture'];
-  return roadmap.reduce((acc, curr) => acc + ' > ' + curr);
-}
-
-class TechBrutalism {
-  constructor() {
-    this.aesthetic = 'High Contrast';
-    this.typography = 'Bricolage Grotesque';
-    this.speed = 'Extreme';
-  }
-}
-
-function masterLaravel() {
-  const roadmap = ['Basics', 'Eloquent', 'Architecture'];
-  return roadmap.reduce((acc, curr) => acc + ' > ' + curr);
-}`}
-        </div>
-      </div>
-
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background pt-20">
+      {/* Playful Floating Blobs */}
+      <div className="absolute top-[10%] left-[5%] w-64 h-64 bg-primary/20 rounded-full blur-[80px] animate-bounce-slow" />
+      <div className="absolute bottom-[15%] right-[10%] w-80 h-80 bg-secondary/20 rounded-full blur-[100px] animate-bounce-slow" style={{ animationDelay: '1s' }} />
+      <div className="absolute top-[40%] right-[20%] w-48 h-48 bg-accent/20 rounded-full blur-[60px] animate-bounce-slow" style={{ animationDelay: '2s' }} />
+      
       <div className="container relative z-10 px-4">
-        <div className="flex flex-col lg:flex-row items-center lg:items-end gap-12 lg:gap-24">
-          {/* Logo & Side Stats */}
-          <div className="relative group lg:w-1/3 flex flex-col items-center lg:items-start">
-            <div className="relative mb-8 animate-reveal" style={{ animationDelay: '0.1s' }}>
-              <div className="absolute -inset-4 bg-primary/20 blur-2xl group-hover:bg-primary/30 transition-all duration-500 rounded-full" />
-              <img 
-                src={logo} 
-                alt="Cool Tips Logo" 
-                className="w-48 h-48 lg:w-64 lg:h-64 rounded-none border-4 border-foreground relative z-10 object-cover grayscale hover:grayscale-0 transition-all duration-700"
-              />
-              <div className="absolute -bottom-4 -right-4 bg-primary text-primary-foreground px-4 py-2 font-black text-xl z-20 shadow-card">
-                EST. 2024
-              </div>
-            </div>
-            
-            <div className="flex gap-12 animate-reveal" style={{ animationDelay: '0.2s' }}>
-              <div className="flex flex-col">
-                <span className="text-4xl lg:text-5xl font-black text-foreground">216</span>
-                <span className="text-xs uppercase tracking-[0.2em] font-bold text-muted-foreground">Subscribers</span>
-              </div>
-              <div className="flex flex-col">
-                <span className="text-4xl lg:text-5xl font-black text-foreground">64</span>
-                <span className="text-xs uppercase tracking-[0.2em] font-bold text-muted-foreground">Tutorials</span>
-              </div>
+        <div className="max-w-4xl mx-auto text-center">
+          <div className="relative inline-block mb-12 animate-reveal group">
+            <div className="absolute inset-0 bg-primary/20 rounded-full blur-2xl group-hover:bg-primary/40 transition-all duration-500 scale-150" />
+            <img 
+              src={logo} 
+              alt="Cool Tips Logo" 
+              className="w-48 h-48 lg:w-64 lg:h-64 rounded-full border-8 border-foreground relative z-10 object-cover squish-hover shadow-tactile"
+            />
+            <div className="absolute -bottom-6 -right-6 bg-accent text-accent-foreground px-6 py-3 rounded-full font-bold text-2xl z-20 shadow-tactile rotate-12 animate-wiggle">
+              Yay! 2024
             </div>
           </div>
 
-          {/* Main Content */}
-          <div className="flex-1 text-center lg:text-left">
-            <div className="inline-block px-3 py-1 bg-accent text-accent-foreground font-bold text-xs uppercase tracking-widest mb-6 animate-reveal" style={{ animationDelay: '0.3s' }}>
-              Laravel Educational Content
+          <div className="flex flex-col items-center gap-6 mb-12">
+            <div className="animate-reveal inline-block px-6 py-2 rounded-full border-4 border-foreground bg-white text-foreground text-sm font-bold uppercase tracking-widest shadow-tactile-hover" style={{ animationDelay: '0.1s' }}>
+              Awesome Programming Tips!
             </div>
             
-            <h1 className="text-6xl md:text-8xl lg:text-9xl font-black mb-6 leading-[0.9] animate-reveal" style={{ animationDelay: '0.4s' }}>
-              <span className="block italic text-primary">COOL</span>
-              <span className="block text-foreground">TIPS</span>
+            <h1 className="animate-reveal text-7xl md:text-9xl font-bold mb-6 leading-[0.8] tracking-tighter" style={{ animationDelay: '0.2s' }}>
+              <span className="block text-primary drop-shadow-lg">COOL</span>
+              <span className="block text-foreground drop-shadow-lg">TIPS</span>
             </h1>
 
-            <p className="text-xl md:text-2xl text-foreground font-bold mb-8 max-w-xl animate-reveal leading-tight" style={{ animationDelay: '0.5s' }}>
-              @coooltips — WE WANT TO HELP MAKE PROGRAMMING POPULAR WITH OUR TUTORIALS.
+            <p className="animate-reveal text-2xl md:text-3xl text-foreground/80 font-bold max-w-2xl mx-auto leading-tight" style={{ animationDelay: '0.3s' }}>
+              WE MAKE CODING FUN & BUBBLY WITH OUR EASY TUTORIALS!
             </p>
+          </div>
 
-            <div className="flex flex-col sm:flex-row gap-4 animate-reveal" style={{ animationDelay: '0.6s' }}>
-              <Button 
-                size="lg" 
-                className="h-16 px-10 text-xl font-black rounded-none bg-primary text-primary-foreground hover:translate-x-1 hover:translate-y-1 transition-transform border-2 border-foreground shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,0.2)]"
-                asChild
-              >
-                <a href="https://www.youtube.com/@coooltips" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3">
-                  <Youtube className="w-6 h-6" />
-                  SUBSCRIBE
-                </a>
-              </Button>
-              <Button 
-                size="lg" 
-                variant="outline"
-                className="h-16 px-10 text-xl font-black rounded-none border-2 border-foreground bg-transparent text-foreground hover:bg-foreground hover:text-background transition-colors"
-                asChild
-              >
-                <a href="https://www.youtube.com/@coooltips/videos" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3">
-                  <Play className="w-6 h-6" />
-                  WATCH
-                </a>
-              </Button>
+          <div className="animate-reveal flex flex-col sm:flex-row items-center justify-center gap-8" style={{ animationDelay: '0.4s' }}>
+            <Button 
+              size="lg" 
+              className="h-20 px-12 text-2xl font-bold rounded-full bg-primary text-primary-foreground border-4 border-foreground shadow-tactile hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[12px_12px_0px_0px_#222] transition-all"
+              asChild
+            >
+              <a href="https://www.youtube.com/@coooltips" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4">
+                <Youtube className="w-8 h-8" />
+                JOIN US!
+              </a>
+            </Button>
+            <Button 
+              size="lg" 
+              variant="outline"
+              className="h-20 px-12 text-2xl font-bold rounded-full border-4 border-foreground bg-white text-foreground hover:bg-secondary hover:text-secondary-foreground transition-all shadow-tactile"
+              asChild
+            >
+              <a href="https://www.youtube.com/@coooltips/videos" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4">
+                <Play className="w-8 h-8 fill-current" />
+                WATCH!
+              </a>
+            </Button>
+          </div>
+          
+          <div className="animate-reveal mt-20 flex justify-center gap-12" style={{ animationDelay: '0.5s' }}>
+            <div className="flex flex-col items-center group cursor-pointer hover:scale-110 transition-transform">
+              <span className="text-5xl font-bold text-foreground mb-1 group-hover:text-primary transition-colors">216</span>
+              <span className="text-xs uppercase font-bold text-muted-foreground">Buddies</span>
+            </div>
+            <div className="flex flex-col items-center group cursor-pointer hover:scale-110 transition-transform">
+              <span className="text-5xl font-bold text-foreground mb-1 group-hover:text-secondary transition-colors">64</span>
+              <span className="text-xs uppercase font-bold text-muted-foreground">Stories</span>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Decorative Line */}
-      <div className="absolute bottom-12 left-0 w-full flex items-center gap-4 px-4 overflow-hidden opacity-20">
-        <div className="h-px flex-1 bg-foreground" />
-        <div className="font-mono text-xs whitespace-nowrap uppercase tracking-[0.5em]">
-          Learn more and more / Laravel / PHP / JS / Backend Masterclass
-        </div>
-        <div className="h-px w-24 bg-foreground" />
-      </div>
+      {/* Background Bubbly Elements */}
+      <div className="absolute top-20 right-20 w-12 h-12 rounded-full bg-accent animate-bounce-slow opacity-20" />
+      <div className="absolute bottom-40 left-40 w-16 h-16 rounded-full bg-primary animate-bounce-slow opacity-30" style={{ animationDelay: '1.5s' }} />
     </section>
   );
 };

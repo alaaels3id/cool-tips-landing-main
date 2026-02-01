@@ -13,21 +13,21 @@ export function ThemeToggle() {
   const { theme, setTheme } = useTheme()
 
   return (
-    <div className="fixed bottom-6 left-6 z-[100] group">
-      <Button
-        variant="outline"
-        size="icon"
-        onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-        className="w-16 h-16 rounded-none border-4 border-foreground bg-background text-foreground shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] dark:shadow-[6px_6px_0px_0px_rgba(255,255,255,0.2)] hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[8px_8px_0px_0px_rgba(255,77,0,1)] transition-all duration-300 relative group"
+    <div className="fixed bottom-8 left-8 z-[100] group">
+      <Button 
+        variant="outline" 
+        size="icon" 
+        onClick={() => setTheme(theme === "dark" ? "light" : "dark")} 
+        className="w-20 h-20 rounded-[1.8rem] border-4 border-foreground bg-white text-foreground shadow-tactile hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-tactile-hover transition-all duration-300 relative group active:scale-90"
       >
-        <Sun className="h-8 w-8 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0 group-hover:text-primary" />
-        <Moon className="absolute h-8 w-8 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100 group-hover:text-primary" />
-        <div className="absolute -top-1 -right-1 w-3 h-3 bg-primary border border-foreground" />
+        <Sun className="h-10 w-10 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0 group-hover:text-primary group-hover:animate-wiggle" />
+        <Moon className="absolute h-10 w-10 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100 group-hover:text-secondary group-hover:animate-wiggle" />
+        <div className="absolute -top-1 -right-1 w-6 h-6 bg-accent border-4 border-foreground rounded-full animate-pulse" />
         <span className="sr-only">Toggle theme</span>
       </Button>
-      <div className="absolute left-20 bottom-0 overflow-hidden whitespace-nowrap pointer-events-none group-hover:opacity-100 opacity-0 transition-opacity">
-        <span className="font-mono text-[10px] bg-foreground text-background px-2 py-1 uppercase font-black">
-          System_{theme?.toUpperCase()}
+      <div className="absolute left-24 bottom-2 overflow-hidden whitespace-nowrap pointer-events-none group-hover:opacity-100 opacity-0 transition-opacity">
+        <span className="font-bold text-xs bg-foreground text-background px-4 py-1.5 rounded-full uppercase tracking-widest shadow-tactile-hover">
+          Mode: {theme === 'dark' ? 'Nighty' : 'Sunny'}!
         </span>
       </div>
     </div>
