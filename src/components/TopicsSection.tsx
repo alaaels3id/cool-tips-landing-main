@@ -1,4 +1,5 @@
 import { Code, Database, Globe, Terminal, Layers, Cpu } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const topics = [
   { icon: Code, name: "PHP", color: "text-blue-400" },
@@ -10,6 +11,8 @@ const topics = [
 ];
 
 const TopicsSection = () => {
+  const { t } = useTranslation();
+
   return (
     <section className="py-40 relative bg-background overflow-hidden border-t-8 border-foreground">
       {/* Decorative Floating Blobs */}
@@ -18,13 +21,13 @@ const TopicsSection = () => {
       <div className="container px-4 relative z-10">
         <div className="flex flex-col items-center text-center mb-24 animate-reveal">
           <div className="inline-block px-4 py-1 rounded-full bg-secondary text-secondary-foreground font-bold text-xs uppercase tracking-widest mb-6 rotate-[2deg]">
-            Learn All The Things!
+            {t('topics.badge')}
           </div>
           <h2 className="text-5xl md:text-8xl font-bold mb-8 text-foreground tracking-tighter">
-            WHAT WE <span className="text-accent italic">TEACH!</span>
+            {t('topics.title')} <span className="text-accent italic">{t('topics.subtitle')}</span>
           </h2>
           <p className="text-2xl font-bold text-foreground/60 max-w-2xl mx-auto leading-tight">
-            EVERYTHING YOU NEED TO BUILD AWESOME STUFF WITH LARAVEL, PHP, AND MODERN WEB MAGIC!
+            {t('topics.description')}
           </p>
         </div>
 
@@ -45,7 +48,7 @@ const TopicsSection = () => {
               <div className="flex flex-col">
                 <div className="flex items-center gap-2 mb-2">
                   <span className="text-[10px] font-bold uppercase tracking-widest bg-foreground text-background px-2 py-0.5 rounded-full">
-                    Module {String(index + 1).padStart(2, '0')}
+                    {t('topics.module')} {String(index + 1).padStart(2, '0')}
                   </span>
                 </div>
                 <span className="text-3xl font-bold tracking-tighter group-hover:text-primary transition-colors">
@@ -59,6 +62,5 @@ const TopicsSection = () => {
     </section>
   );
 };
-
 
 export default TopicsSection;

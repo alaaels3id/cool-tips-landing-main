@@ -4,6 +4,9 @@ import { Play, Clock, Eye, ArrowLeft, ArrowRight, X } from "lucide-react";
 import logo from "@/assets/logo.png";
 import { allVideos, Video } from "@/data/videos";
 import { Button } from "@/components/ui/button";
+import { useTranslation } from "react-i18next";
+import Footer from "@/components/Footer";
+import SocialLinks from "@/components/SocialLinks";
 import {
   Dialog,
   DialogContent,
@@ -14,6 +17,7 @@ import {
 const VIDEOS_PER_PAGE = 8;
 
 const Videos = () => {
+  const { t, i18n } = useTranslation();
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedVideo, setSelectedVideo] = useState<Video | null>(null);
   const totalPages = Math.ceil(allVideos.length / VIDEOS_PER_PAGE);
@@ -38,7 +42,7 @@ const Videos = () => {
               </div>
               <div className="flex flex-col">
                 <span className="font-bold text-3xl tracking-tighter">
-                  COOL <span className="text-primary italic">TIPS!</span>
+                  {t('hero.title_cool')} <span className="text-primary italic">{t('hero.title_tips')}!</span>
                 </span>
                 <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground bg-foreground text-background px-2 py-0.5 rounded-full inline-block">
                   Video_Palooza_v2
@@ -47,10 +51,10 @@ const Videos = () => {
             </Link>
             <Link 
               to="/" 
-              className="group flex items-center gap-4 text-sm font-bold uppercase tracking-widest hover:text-primary transition-colors bg-white border-4 border-foreground px-6 py-2 rounded-full shadow-tactile hover:translate-x-1"
+              className="group flex items-center gap-4 text-sm font-bold uppercase tracking-widest hover:text-primary transition-colors bg-white border-4 border-foreground px-6 py-2 rounded-full shadow-tactile hover:translate-x-1 rtl:hover:translate-x-[-4px]"
             >
-              <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
-              Go Back Home!
+              <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 rtl:group-hover:translate-x-1 rtl:rotate-180 transition-transform" />
+              {t('common.back')}
             </Link>
           </div>
         </div>
@@ -64,13 +68,13 @@ const Videos = () => {
 
         <div className="flex flex-col items-center text-center mb-32 animate-reveal">
           <div className="inline-block px-4 py-1 rounded-full bg-accent text-accent-foreground font-bold text-xs uppercase tracking-widest mb-10 rotate-[-2deg]">
-            All The Awesome Stuff!
+            {t('archive.badge')}
           </div>
           <h1 className="text-6xl md:text-9xl font-bold mb-10 leading-[0.8] tracking-tighter">
-            BIG <span className="text-primary italic">ARCHIVE!</span>
+            {t('archive.title')} <span className="text-primary italic">{t('archive.subtitle')}</span>
           </h1>
           <p className="text-2xl font-bold text-foreground/60 max-w-2xl leading-tight uppercase">
-            JUMP INTO OUR WHOLE COLLECTION OF SUPER EASY TUTORIALS AND COOL CODING TRICKS!
+            {t('archive.description')}
           </p>
           <div className="w-40 h-4 bg-secondary rounded-full mt-16" />
         </div>
@@ -91,11 +95,11 @@ const Videos = () => {
                 />
                 <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[2px] z-20">
                   <div className="w-16 h-16 rounded-full bg-foreground text-background flex items-center justify-center animate-wiggle">
-                    <Play className="w-8 h-8 fill-current ml-1" />
+                    <Play className="w-8 h-8 fill-current ml-1 rtl:rotate-180 rtl:mr-1 rtl:ml-0" />
                   </div>
                 </div>
                 
-                <div className="absolute bottom-4 right-4 z-30 flex items-center gap-2 bg-white text-foreground px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest border-2 border-foreground shadow-tactile-hover">
+                <div className="absolute bottom-4 right-4 rtl:right-auto rtl:left-4 z-30 flex items-center gap-2 bg-white text-foreground px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest border-2 border-foreground shadow-tactile-hover">
                   <Clock className="w-3 h-3" />
                   {video.duration}
                 </div>
@@ -103,7 +107,9 @@ const Videos = () => {
               
               <div className="px-2">
                 <div className="flex items-center gap-2 mb-4">
-                  <span className="text-[10px] font-bold uppercase tracking-widest bg-secondary text-secondary-foreground px-2 py-0.5 rounded-full border-2 border-foreground">Entry_{String(startIndex + index + 1).padStart(3, '0')}</span>
+                  <span className="text-[10px] font-bold uppercase tracking-widest bg-secondary text-secondary-foreground px-2 py-0.5 rounded-full border-2 border-foreground">
+                    {t('archive.entry')}_{String(startIndex + index + 1).padStart(3, '0')}
+                  </span>
                   <div className="h-1 flex-1 bg-foreground/10 rounded-full" />
                   <div className="flex items-center gap-1.5 text-[10px] font-bold text-muted-foreground uppercase">
                     <Eye className="w-3 h-3" />
@@ -131,7 +137,7 @@ const Videos = () => {
               disabled={currentPage === 1}
               className="w-20 h-20 rounded-full border-4 border-foreground bg-white shadow-tactile hover:translate-x-[-2px] hover:translate-y-[-2px] disabled:opacity-30 disabled:shadow-none transition-all"
             >
-              <ArrowLeft className="w-10 h-10" />
+              <ArrowLeft className="w-10 h-10 rtl:rotate-180" />
             </Button>
             
             <div className="flex gap-4">
@@ -158,7 +164,7 @@ const Videos = () => {
               disabled={currentPage === totalPages}
               className="w-20 h-20 rounded-full border-4 border-foreground bg-white shadow-tactile hover:translate-x-1 hover:translate-y-[-2px] disabled:opacity-30 disabled:shadow-none transition-all"
             >
-              <ArrowRight className="w-10 h-10" />
+              <ArrowRight className="w-10 h-10 rtl:rotate-180" />
             </Button>
           </div>
         )}
@@ -190,23 +196,15 @@ const Videos = () => {
                 onClick={() => setSelectedVideo(null)}
                 className="h-20 px-12 rounded-full bg-accent text-accent-foreground font-bold text-2xl border-4 border-foreground shadow-tactile hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all"
               >
-                CLOSE!
+                {t('archive.close')}
               </Button>
             </div>
           </DialogContent>
         </Dialog>
       </main>
 
-      {/* Playful Decorative Line */}
-      <div className="bg-foreground text-background py-4 overflow-hidden border-y-8 border-primary">
-        <div className="flex gap-20 animate-marquee whitespace-nowrap">
-          {[...Array(10)].map((_, i) => (
-            <span key={i} className="text-xl font-bold tracking-widest uppercase select-none">
-              AWESOME TIPS ★ COOL TRICKS ★ HAPPY CODING ★ SUPER LARAVEL ★ MASTER PHP ★ AWESOME TIPS ★ COOL TRICKS ★ HAPPY CODING ★
-            </span>
-          ))}
-        </div>
-      </div>
+      <SocialLinks />
+      <Footer />
     </div>
   );
 };

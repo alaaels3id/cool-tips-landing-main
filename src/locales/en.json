@@ -1,0 +1,68 @@
+{
+  "hero": {
+    "badge": "Laravel Educational Content",
+    "title_cool": "COOL",
+    "title_tips": "TIPS",
+    "description": "@coooltips — WE WANT TO HELP MAKE PROGRAMMING POPULAR WITH OUR TUTORIALS.",
+    "subscribe": "SUBSCRIBE",
+    "watch": "WATCH",
+    "subscribers": "Subscribers",
+    "tutorials": "Tutorials",
+    "marquee": "Learn more and more / Laravel / PHP / JS / Backend Masterclass"
+  },
+  "featured": {
+    "badge": "Super Awesome!",
+    "title": "THE BEST",
+    "subtitle": "STUFF!",
+    "description": "A curated selection of Laravel technical masterclasses. Master the framework, one tip at a time.",
+    "lessons": "Latest Lessons",
+    "visit_all": "visit all videos",
+    "lesson": "Lesson",
+    "close": "CLOSE_ENTRY",
+    "more": "See way more!"
+  },
+  "topics": {
+    "badge": "Learn All The Things!",
+    "title": "WHAT WE",
+    "subtitle": "TEACH!",
+    "description": "EVERYTHING YOU NEED TO BUILD AWESOME STUFF WITH LARAVEL, PHP, AND MODERN WEB MAGIC!",
+    "module": "Module"
+  },
+  "social": {
+    "badge": "Let's Be Friends!",
+    "title": "JOIN OUR",
+    "subtitle": "CLUB!",
+    "description": "FOLLOW THE ADVENTURE! CONNECT WITH OUR FRIENDLY COMMUNITY ACROSS ALL THESE COOL PLACES!",
+    "join": "Click to Join!",
+    "youtube": "YouTube",
+    "twitter": "Twitter",
+    "linkedin": "LinkedIn",
+    "facebook": "Facebook"
+  },
+  "footer": {
+    "badge": "Your Bestest Coding Pal!",
+    "description": "WE'RE JUST A BUNCH OF FRIENDS WHO LOVE MAKING CODING COOL & EASY FOR EVERYONE!",
+    "jump": "Jump In!",
+    "boring": "Boring Stuff",
+    "privacy": "Privacy!",
+    "terms": "Terms!",
+    "friendship": "Friendship",
+    "since": "Since 2024",
+    "status": "Status: Super Healthy & Happy!",
+    "crafted": "Crafted With Hugs & Sprinkles"
+  },
+  "archive": {
+    "badge": "All The Awesome Stuff!",
+    "title": "BIG",
+    "subtitle": "ARCHIVE!",
+    "description": "JUMP INTO OUR WHOLE COLLECTION OF SUPER EASY TUTORIALS AND COOL CODING TRICKS!",
+    "entry": "Entry",
+    "close": "CLOSE!",
+    "marquee": "AWESOME TIPS ★ COOL TRICKS ★ HAPPY CODING ★ SUPER LARAVEL ★ MASTER PHP ★ AWESOME TIPS ★"
+  },
+  "common": {
+    "status": "Active",
+    "exit": "EXIT_ARCHIVE",
+    "back": "Go Back Home!"
+  }
+}

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Play, Clock, ArrowRight } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import {
   Dialog,
   DialogContent,
@@ -12,6 +13,7 @@ import {
 import { featuredVideos as videos } from "@/data/videos";
 
 const FeaturedVideos = () => {
+  const { t } = useTranslation();
   const [selectedVideo, setSelectedVideo] = useState<typeof videos[0] | null>(null);
 
   return (
@@ -19,10 +21,10 @@ const FeaturedVideos = () => {
       <div className="container px-4">
         <div className="flex flex-col items-center text-center mb-24 animate-reveal">
           <div className="inline-block px-4 py-1 rounded-full bg-accent text-accent-foreground font-bold text-xs uppercase tracking-widest mb-6 rotate-[-2deg]">
-            Super Awesome!
+            {t('featured.badge')}
           </div>
           <h2 className="text-5xl md:text-8xl font-bold mb-6 text-foreground tracking-tighter">
-            THE BEST <span className="text-primary italic">STUFF!</span>
+            {t('featured.title')} <span className="text-primary italic">{t('featured.subtitle')}</span>
           </h2>
           <div className="w-32 h-4 bg-secondary rounded-full" />
         </div>
@@ -43,7 +45,7 @@ const FeaturedVideos = () => {
                 />
                 <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[2px]">
                   <div className="w-20 h-20 rounded-full bg-foreground text-background flex items-center justify-center animate-wiggle">
-                    <Play className="w-10 h-10 fill-current ml-1" />
+                    <Play className="w-10 h-10 fill-current ml-1 rtl:rotate-180" />
                   </div>
                 </div>
               </div>
@@ -51,7 +53,7 @@ const FeaturedVideos = () => {
               <div className="px-2">
                 <div className="flex items-center gap-4 mb-4">
                   <span className="text-xs font-bold uppercase tracking-widest bg-secondary text-secondary-foreground px-3 py-1 rounded-full border-2 border-foreground">
-                    Tip #{index + 1}
+                    {t('featured.lesson')} #{index + 1}
                   </span>
                   <div className="flex items-center gap-1.5 text-xs font-bold text-muted-foreground">
                     <Clock className="w-4 h-4" />
@@ -74,9 +76,9 @@ const FeaturedVideos = () => {
             to="/videos"
             className="group flex items-center gap-6 text-2xl font-bold uppercase italic hover:text-primary transition-colors hover:scale-110"
           >
-            See way more!
+            {t('featured.more')}
             <div className="w-16 h-16 rounded-full bg-foreground text-background flex items-center justify-center group-hover:bg-primary group-hover:text-primary-foreground group-hover:rotate-12 transition-all shadow-tactile border-4 border-foreground">
-              <ArrowRight className="w-8 h-8" />
+              <ArrowRight className="w-8 h-8 rtl:rotate-180" />
             </div>
           </Link>
         </div>
@@ -107,7 +109,7 @@ const FeaturedVideos = () => {
                 onClick={() => setSelectedVideo(null)}
                 className="h-16 px-10 rounded-full bg-accent text-accent-foreground font-bold text-xl border-4 border-foreground shadow-tactile hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all"
               >
-                Close it!
+                {t('featured.close')}
               </Button>
             </div>
           </DialogContent>

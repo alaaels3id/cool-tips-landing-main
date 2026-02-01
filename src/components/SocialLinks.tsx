@@ -1,14 +1,17 @@
 import { Button } from "@/components/ui/button";
 import { Youtube, Twitter, Linkedin, Facebook } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const socials = [
-  { icon: Youtube, name: "YouTube", url: "https://www.youtube.com/@coooltips", color: "hover:bg-red-600" },
-  { icon: Twitter, name: "Twitter", url: "https://twitter.com/coool_tips", color: "hover:bg-sky-500" },
-  { icon: Linkedin, name: "LinkedIn", url: "https://www.linkedin.com/in/alaa-elsa", color: "hover:bg-blue-600" },
-  { icon: Facebook, name: "Facebook", url: "https://www.facebook.com/coooltips", color: "hover:bg-blue-700" },
+  { icon: Youtube, nameKey: "social.youtube", url: "https://www.youtube.com/@coooltips", color: "hover:bg-red-600" },
+  { icon: Twitter, nameKey: "social.twitter", url: "https://twitter.com/coool_tips", color: "hover:bg-sky-500" },
+  { icon: Linkedin, nameKey: "social.linkedin", url: "https://www.linkedin.com/in/alaa-elsa", color: "hover:bg-blue-600" },
+  { icon: Facebook, nameKey: "social.facebook", url: "https://www.facebook.com/coooltips", color: "hover:bg-blue-700" },
 ];
 
 const SocialLinks = () => {
+  const { t } = useTranslation();
+
   return (
     <section className="py-40 bg-background relative overflow-hidden border-t-8 border-foreground">
       {/* Playful Floating Blobs */}
@@ -18,13 +21,13 @@ const SocialLinks = () => {
       <div className="container px-4 relative z-10">
         <div className="max-w-4xl mx-auto text-center mb-24 animate-reveal">
           <div className="inline-block px-4 py-1 rounded-full bg-accent text-accent-foreground font-bold text-xs uppercase tracking-widest mb-6 rotate-[-2deg]">
-            Let's Be Friends!
+            {t('social.badge')}
           </div>
           <h2 className="text-5xl md:text-8xl font-bold mb-8 text-foreground tracking-tighter">
-            JOIN OUR <span className="text-primary italic">CLUB!</span>
+            {t('social.title')} <span className="text-primary italic">{t('social.subtitle')}</span>
           </h2>
           <p className="text-2xl font-bold text-foreground/60 max-w-xl mx-auto leading-tight">
-            FOLLOW THE ADVENTURE! CONNECT WITH OUR FRIENDLY COMMUNITY ACROSS ALL THESE COOL PLACES!
+            {t('social.description')}
           </p>
         </div>
 
@@ -46,9 +49,9 @@ const SocialLinks = () => {
               </div>
               
               <div className="text-center">
-                <span className="block text-2xl font-bold tracking-tighter mb-1 uppercase">{social.name}!</span>
+                <span className="block text-2xl font-bold tracking-tighter mb-1 uppercase">{t(social.nameKey)}!</span>
                 <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground group-hover:text-foreground">
-                  Click to Join!
+                  {t('social.join')}
                 </span>
               </div>
             </a>
@@ -58,6 +61,5 @@ const SocialLinks = () => {
     </section>
   );
 };
-
 
 export default SocialLinks;

@@ -10,6 +10,8 @@ import NotFound from "./pages/NotFound";
 const queryClient = new QueryClient();
 
 import { ThemeProvider } from "@/components/ThemeProvider";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
@@ -17,6 +19,8 @@ const App = () => (
       <TooltipProvider>
         <Toaster />
         <Sonner />
+        <LanguageSwitcher />
+        <ThemeToggle />
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
