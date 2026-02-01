@@ -60,6 +60,32 @@
     "close": "CLOSE!",
     "marquee": "AWESOME TIPS ★ COOL TRICKS ★ HAPPY CODING ★ SUPER LARAVEL ★ MASTER PHP ★ AWESOME TIPS ★"
   },
+  "privacy": {
+    "title": "PRIVATE",
+    "subtitle": "STUFF!",
+    "badge": "Shhh! It's a Secret!",
+    "intro": "WE CARE ABOUT YOUR DATA AS MUCH AS WE CARE ABOUT CLEAN CODE! HERE'S HOW WE KEEP THINGS SAFE AND HAPPY!",
+    "section1_title": "1. WHAT WE COLLECT",
+    "section1_text": "WE ONLY COLLECT WHAT'S NECESSARY TO MAKE YOUR EXPERIENCE AWESOME! LIKE YOUR PREFERRED LANGUAGE AND THEME.",
+    "section2_title": "2. HOW WE USE IT",
+    "section2_text": "WE USE YOUR DATA TO KEEP THE SITE RUNNING SMOOTHLY AND TO REMEMBER YOUR COOL PREFERENCES!",
+    "section3_title": "3. COOKIE PARTY",
+    "section3_text": "WE USE LITTLE COOKIES TO REMEMBER IF YOU LIKE DARK MODE OR ARABIC. THEY'RE NOT THE EATABLE KIND, BUT THEY'RE HELPFUL!",
+    "last_updated": "Last updated: Feb 2026"
+  },
+  "terms": {
+    "title": "THE",
+    "subtitle": "RULES!",
+    "badge": "Common Sense Zone!",
+    "intro": "WELCOME TO COOL TIPS! BY HANGING OUT HERE, YOU AGREE TO BE AWESOME AND FOLLOW THESE SIMPLE GUIDELINES!",
+    "section1_title": "1. BE COOL",
+    "section1_text": "TREAT EVERYONE WITH RESPECT! WE'RE ALL HERE TO LEARN AND MAKE COOL STUFF TOGETHER.",
+    "section2_title": "2. CONTENT MAGIC",
+    "section2_text": "THE CODE AND TIPS WE SHARE ARE FOR LEARNING. FEEL FREE TO USE THEM IN YOUR PROJECTS AND MAKE MAGIC HAPPEN!",
+    "section3_title": "3. NO BAD STUFF",
+    "section3_text": "PLEASE DON'T TRY TO BREAK THE SITE OR DO ANYTHING MEAN. KEEP THE VIBES POSITIVE!",
+    "last_updated": "Last updated: Feb 2026"
+  },
   "common": {
     "status": "Active",
     "exit": "EXIT_ARCHIVE",

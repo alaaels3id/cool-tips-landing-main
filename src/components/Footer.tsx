@@ -44,8 +44,8 @@ const Footer = () => {
             </div>
             <div className="flex flex-col gap-4">
               <span className="text-xs font-black uppercase tracking-widest text-muted-foreground">{t('footer.boring')}</span>
-              <span className="text-xl font-bold hover:text-primary cursor-pointer transition-colors italic uppercase tracking-tighter">{t('footer.privacy')}</span>
-              <span className="text-xl font-bold hover:text-primary cursor-pointer transition-colors italic uppercase tracking-tighter">{t('footer.terms')}</span>
+              <Link to="/privacy" className="text-xl font-bold hover:text-primary cursor-pointer transition-colors italic uppercase tracking-tighter">{t('footer.privacy')}</Link>
+              <Link to="/terms" className="text-xl font-bold hover:text-primary cursor-pointer transition-colors italic uppercase tracking-tighter">{t('footer.terms')}</Link>
             </div>
             <div className="flex flex-col gap-4">
               <span className="text-xs font-black uppercase tracking-widest text-muted-foreground">{t('footer.friendship')}</span>
