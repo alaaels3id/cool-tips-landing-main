@@ -21,13 +21,13 @@ export function ThemeToggle() {
         variant="outline" 
         size="icon" 
         onClick={() => setTheme(currentTheme === "dark" ? "light" : "dark")} 
-        className="w-20 h-20 rounded-[1.8rem] border-4 border-foreground bg-white text-foreground shadow-tactile hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-tactile-hover transition-all duration-300 relative group active:scale-90 flex items-center justify-center p-0"
+        className="w-20 h-20 rounded-[1.8rem] border-4 border-foreground bg-white text-foreground shadow-tactile hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-tactile-hover transition-all duration-300 relative group active:scale-90 flex items-center justify-center"
       >
-        <div className="relative w-10 h-10">
-          <Sun className={`absolute inset-0 h-full w-full transition-all duration-500 group-hover:text-primary group-hover:animate-wiggle 
+        <div className="relative w-10 h-10 flex items-center justify-center">
+          <Sun className={`absolute h-10 w-10 transition-all duration-500 group-hover:text-primary group-hover:animate-wiggle 
             ${currentTheme === 'dark' ? 'rotate-90 scale-0 opacity-0' : 'rotate-0 scale-100 opacity-100'}`} 
           />
-          <Moon className={`absolute inset-0 h-full w-full transition-all duration-500 group-hover:text-secondary group-hover:animate-wiggle
+          <Moon className={`absolute h-10 w-10 transition-all duration-500 group-hover:text-secondary group-hover:animate-wiggle
             ${currentTheme === 'dark' ? 'rotate-0 scale-100 opacity-100' : '-rotate-90 scale-0 opacity-0'}`} 
           />
         </div>
