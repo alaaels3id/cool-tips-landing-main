@@ -1,33 +1,45 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Play, Clock, Eye, ArrowLeft, ArrowRight, X } from "lucide-react";
-import logo from "@/assets/logo.png";
-import { allVideos, Video } from "@/data/videos";
-import { Button } from "@/components/ui/button";
-import { useTranslation } from "react-i18next";
-import Footer from "@/components/Footer";
-import SocialLinks from "@/components/SocialLinks";
-import VideoCard from "@/components/VideoCard";
+import { Card, CardContent } from "@/components/ui/card";
+import { Play, Clock, Eye, ArrowLeft } from "lucide-react";
 import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
+import logo from "@/assets/logo.png";
 
-const VIDEOS_PER_PAGE = 9; // Changed from 8 to 9 to fit 3-column grid better
+const allVideos = [
+  { title: "Create Custom Laravel Stub File", duration: "17:38", views: "801", description: "Learn how to create a custom stub file to make a specific idea and how to use it in real life." },
+  { title: "Laravel API Development", duration: "24:15", views: "1.2K", description: "Master Laravel API development with best practices and real-world examples." },
+  { title: "PHP Tips & Tricks", duration: "12:30", views: "956", description: "Essential PHP tips and tricks every developer should know." },
+  { title: "Vue.js Integration", duration: "19:45", views: "734", description: "Seamlessly integrate Vue.js with your Laravel applications." },
+  { title: "MySQL Query Optimization", duration: "21:10", views: "1.1K", description: "Optimize your database queries for better performance." },
+  { title: "Laravel Authentication", duration: "28:30", views: "2.3K", description: "Build secure authentication systems with Laravel." },
+  { title: "RESTful API Design", duration: "15:45", views: "890", description: "Design clean and scalable RESTful APIs." },
+  { title: "PHP OOP Fundamentals", duration: "32:20", views: "1.5K", description: "Master object-oriented programming in PHP." },
+  { title: "Laravel Eloquent Relationships", duration: "26:15", views: "1.8K", description: "Deep dive into Eloquent relationships." },
+  { title: "Blade Templates Mastery", duration: "18:40", views: "670", description: "Create dynamic templates with Laravel Blade." },
+  { title: "CLI Tool Development", duration: "22:55", views: "540", description: "Build powerful command-line tools with PHP." },
+  { title: "Laravel Middleware", duration: "14:20", views: "920", description: "Understanding and creating custom middleware." },
+  { title: "Database Migrations", duration: "11:30", views: "780", description: "Manage database changes with migrations." },
+  { title: "Laravel Queues & Jobs", duration: "29:45", views: "1.4K", description: "Handle background tasks efficiently." },
+  { title: "Testing in Laravel", duration: "35:10", views: "650", description: "Write tests for your Laravel applications." },
+  { title: "Laravel Events & Listeners", duration: "16:25", views: "430", description: "Implement event-driven architecture." },
+];
+
+const VIDEOS_PER_PAGE = 8;
 
 const Videos = () => {
-  const { t, i18n } = useTranslation();
   const [currentPage, setCurrentPage] = useState(1);
-  const [selectedVideo, setSelectedVideo] = useState<Video | null>(null);
   const totalPages = Math.ceil(allVideos.length / VIDEOS_PER_PAGE);
 
   const startIndex = (currentPage - 1) * VIDEOS_PER_PAGE;
-  const currentVideos = allVideos.slice(
-    startIndex,
-    startIndex + VIDEOS_PER_PAGE,
-  );
+  const currentVideos = allVideos.slice(startIndex, startIndex + VIDEOS_PER_PAGE);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
@@ -35,165 +47,116 @@ const Videos = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background text-foreground selection:bg-primary selection:text-primary-foreground">
-      {/* Friendly Header */}
-      <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-xl border-b-8 border-foreground">
-        <div className="container px-4 py-6">
+    <div className="min-h-screen bg-background">
+      {/* Header */}
+      <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border">
+        <div className="container px-4 py-4">
           <div className="flex items-center justify-between">
-            <Link to="/" className="flex items-center gap-6 group">
-              <div className="w-14 h-14 rounded-[1.2rem] bg-white p-2 border-4 border-foreground shadow-tactile-hover group-hover:rotate-6 group-hover:scale-110 transition-all">
-                <img
-                  src={logo}
-                  alt="Cool Tips"
-                  className="w-full h-full object-contain"
-                />
-              </div>
-              <div className="flex flex-col">
-                <span className="font-bold text-3xl tracking-tighter">
-                  {t("hero.title_cool")}{" "}
-                  <span className="text-primary italic">
-                    {t("hero.title_tips")}!
-                  </span>
-                </span>
-                <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground bg-foreground text-background px-2 py-0.5 rounded-full inline-block">
-                  {t('footer.badge')}
-                </span>
-              </div>
+            <Link to="/" className="flex items-center gap-3">
+              <img src={logo} alt="Cool Tips" className="w-10 h-10 rounded-full" />
+              <span className="font-bold text-lg">
+                <span className="text-gradient">Cool</span> Tips
+              </span>
             </Link>
-            <Link
-              to="/"
-              className="group flex items-center gap-4 text-sm font-bold uppercase tracking-widest hover:text-primary transition-colors bg-white border-4 border-foreground px-6 py-2 rounded-full shadow-tactile hover:translate-x-1 rtl:hover:translate-x-[-4px]"
+            <Link 
+              to="/" 
+              className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
             >
-              <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 rtl:group-hover:translate-x-1 rtl:rotate-180 transition-transform" />
-              {t("common.back")}
+              <ArrowLeft className="w-4 h-4" />
+              Back to Home
             </Link>
           </div>
         </div>
       </header>
 
       {/* Main Content */}
-      <main className="container px-4 py-32 relative">
-        {/* Playful Floating Blobs */}
-        <div className="absolute top-0 right-0 w-80 h-80 bg-primary/10 rounded-full blur-[100px] animate-bounce-slow" />
-        <div
-          className="absolute bottom-1/4 left-0 w-64 h-64 bg-secondary/10 rounded-full blur-[80px] animate-bounce-slow"
-          style={{ animationDelay: "1s" }}
-        />
-
-        <div className="flex flex-col items-center text-center mb-32 animate-reveal">
-          <div className="inline-block px-4 py-1 rounded-full bg-accent text-accent-foreground font-bold text-xs uppercase tracking-widest mb-10 rotate-[-2deg]">
-            {t("archive.badge")}
-          </div>
-          <h1 className="text-6xl md:text-9xl font-bold mb-10 leading-[0.8] tracking-tighter">
-            {t("archive.title")}{" "}
-            <span className="text-primary italic">{t("archive.subtitle")}</span>
+      <main className="container px-4 py-12">
+        <div className="text-center mb-12">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">
+            <span className="text-gradient">All</span> Videos
           </h1>
-          <p className="text-2xl font-bold text-foreground/60 max-w-2xl leading-tight uppercase">
-            {t("archive.description")}
+          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+            Browse through our complete collection of programming tutorials
           </p>
-          <div className="w-40 h-4 bg-secondary rounded-full mt-16" />
         </div>
 
         {/* Video Grid */}
-        <div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 mb-32 animate-reveal"
-          style={{ animationDelay: "0.2s" }}
-        >
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
           {currentVideos.map((video, index) => (
-            <VideoCard
-              key={video.id}
-              video={video}
-              index={startIndex + index}
-              onClick={setSelectedVideo}
-              showEntryNumber={true}
-            />
+            <Card 
+              key={startIndex + index}
+              className="group bg-card border-border hover:border-primary/50 transition-all duration-300 overflow-hidden cursor-pointer"
+            >
+              <div className="relative aspect-video bg-secondary overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent z-10" />
+                <div className="absolute inset-0 flex items-center justify-center z-20">
+                  <div className="w-14 h-14 rounded-full bg-primary/90 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                    <Play className="w-6 h-6 text-primary-foreground ml-1" fill="currentColor" />
+                  </div>
+                </div>
+                <div className="absolute bottom-2 right-2 z-20 flex items-center gap-1 bg-background/80 px-2 py-1 rounded text-xs font-mono">
+                  <Clock className="w-3 h-3" />
+                  {video.duration}
+                </div>
+                <div className="absolute inset-0 bg-secondary flex items-center justify-center">
+                  <div className="font-mono text-[8px] text-muted-foreground/30 leading-tight overflow-hidden p-4">
+                    {`<?php
+namespace App\\Http;
+class Controller {
+  public function index() {
+    return view('home');
+  }
+}`}
+                  </div>
+                </div>
+              </div>
+              <CardContent className="p-4">
+                <h3 className="font-semibold text-foreground mb-2 line-clamp-2 group-hover:text-primary transition-colors">
+                  {video.title}
+                </h3>
+                <p className="text-sm text-muted-foreground line-clamp-2 mb-3">
+                  {video.description}
+                </p>
+                <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                  <Eye className="w-3 h-3" />
+                  <span>{video.views} views</span>
+                </div>
+              </CardContent>
+            </Card>
           ))}
         </div>
 
-        {/* Friendly Pagination */}
-        {totalPages > 1 && (
-          <div className="flex items-center justify-center gap-6 animate-reveal">
-            <Button
-              variant="outline"
-              size="lg"
-              onClick={() => handlePageChange(Math.max(1, currentPage - 1))}
-              disabled={currentPage === 1}
-              className="w-20 h-20 rounded-full border-4 border-foreground bg-white shadow-tactile hover:translate-x-[-2px] hover:translate-y-[-2px] disabled:opacity-30 disabled:shadow-none transition-all"
-            >
-              <ArrowLeft className="w-10 h-10 rtl:rotate-180" />
-            </Button>
-
-            <div className="flex gap-4">
-              {[...Array(totalPages)].map((_, i) => (
-                <Button
-                  key={i}
-                  size="lg"
-                  onClick={() => handlePageChange(i + 1)}
-                  className={`w-16 h-16 rounded-full border-4 border-foreground text-2xl font-bold shadow-tactile transition-all
-                    ${currentPage === i + 1
-                      ? "bg-primary text-primary-foreground scale-110 rotate-6"
-                      : "bg-white text-foreground hover:bg-secondary/20"
-                    }
-                  `}
+        {/* Pagination */}
+        <Pagination>
+          <PaginationContent>
+            <PaginationItem>
+              <PaginationPrevious 
+                onClick={() => currentPage > 1 && handlePageChange(currentPage - 1)}
+                className={currentPage === 1 ? "pointer-events-none opacity-50" : "cursor-pointer"}
+              />
+            </PaginationItem>
+            
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+              <PaginationItem key={page}>
+                <PaginationLink
+                  onClick={() => handlePageChange(page)}
+                  isActive={currentPage === page}
+                  className="cursor-pointer"
                 >
-                  {i + 1}
-                </Button>
-              ))}
-            </div>
-
-            <Button
-              variant="outline"
-              size="lg"
-              onClick={() =>
-                handlePageChange(Math.min(totalPages, currentPage + 1))
-              }
-              disabled={currentPage === totalPages}
-              className="w-20 h-20 rounded-full border-4 border-foreground bg-white shadow-tactile hover:translate-x-1 hover:translate-y-[-2px] disabled:opacity-30 disabled:shadow-none transition-all"
-            >
-              <ArrowRight className="w-10 h-10 rtl:rotate-180" />
-            </Button>
-          </div>
-        )}
-
-        {/* Video Modal */}
-        <Dialog
-          open={!!selectedVideo}
-          onOpenChange={(open) => !open && setSelectedVideo(null)}
-        >
-          <DialogContent className="max-w-5xl p-0 bg-background border-8 border-foreground rounded-[3.5rem] overflow-hidden shadow-tactile">
-            <DialogHeader className="p-8 bg-primary text-primary-foreground border-b-8 border-foreground">
-              <DialogTitle className="text-3xl font-bold tracking-tighter">
-                {selectedVideo?.title}!
-              </DialogTitle>
-            </DialogHeader>
-            <div className="relative aspect-video w-full bg-black">
-              {selectedVideo && (
-                <iframe
-                  className="w-full h-full"
-                  src={`https://www.youtube.com/embed/${selectedVideo.id}?autoplay=1`}
-                  title={selectedVideo.title}
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowFullScreen
-                ></iframe>
-              )}
-            </div>
-            <div className="p-10 bg-background flex flex-col md:flex-row justify-between items-center gap-10">
-              <p className="text-xl font-bold max-w-2xl leading-tight uppercase">
-                {selectedVideo?.description}
-              </p>
-              <Button
-                onClick={() => setSelectedVideo(null)}
-                className="h-20 px-12 rounded-full bg-accent text-accent-foreground font-bold text-2xl border-4 border-foreground shadow-tactile hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all"
-              >
-                {t("archive.close")}
-              </Button>
-            </div>
-          </DialogContent>
-        </Dialog>
+                  {page}
+                </PaginationLink>
+              </PaginationItem>
+            ))}
+            
+            <PaginationItem>
+              <PaginationNext 
+                onClick={() => currentPage < totalPages && handlePageChange(currentPage + 1)}
+                className={currentPage === totalPages ? "pointer-events-none opacity-50" : "cursor-pointer"}
+              />
+            </PaginationItem>
+          </PaginationContent>
+        </Pagination>
       </main>
-
-      <SocialLinks />
-      <Footer />
     </div>
   );
 };

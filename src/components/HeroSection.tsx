@@ -1,118 +1,144 @@
 import { Button } from "@/components/ui/button";
 import { Play, Youtube } from "lucide-react";
 import logo from "@/assets/logo.png";
-import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
 
 const HeroSection = () => {
-  const { t } = useTranslation();
-
   return (
-    <section className="relative min-h-[110vh] flex items-center justify-center overflow-hidden bg-background pt-20">
-      {/* Editorial Background Elements */}
-      <div className="absolute inset-0 z-0">
-        <div className="absolute top-[-10%] right-[-5%] text-[40rem] font-black text-primary/5 select-none pointer-events-none leading-none">
-          216
-        </div>
-        <div className="absolute bottom-[10%] left-[-5%] text-[20rem] font-black text-accent/5 select-none pointer-events-none leading-none rotate-12">
-          64
-        </div>
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-[120px] animate-pulse-slow" />
-        <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-accent/5 rounded-full blur-[150px] animate-pulse-slow" style={{ animationDelay: '2s' }} />
-      </div>
-
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      {/* Background effects */}
+      <div className="absolute inset-0 bg-gradient-glow opacity-50" />
+      <div className="absolute top-20 left-10 w-72 h-72 bg-primary/20 rounded-full blur-3xl animate-pulse-slow" />
+      <div className="absolute bottom-20 right-10 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse-slow" style={{ animationDelay: '2s' }} />
+      
       {/* Code background decoration */}
-      <div className="absolute right-0 top-0 h-full w-1/4 overflow-hidden opacity-[0.03] pointer-events-none border-l border-border hidden lg:block">
-        <div className="font-mono text-[10px] text-foreground animate-code-scroll whitespace-pre leading-none p-4">
-          {`// COOL TIPS SOURCE
-function masterLaravel() {
-  const roadmap = ['Basics', 'Eloquent', 'Architecture'];
-  return roadmap.reduce((acc, curr) => acc + ' > ' + curr);
+      <div className="absolute left-0 top-0 h-full w-1/3 overflow-hidden opacity-10 pointer-events-none">
+        <div className="font-mono text-xs text-primary animate-code-scroll whitespace-pre leading-relaxed">
+          {`function createTutorial() {
+  const skills = ['PHP', 'Laravel', 'JavaScript'];
+  return skills.map(skill => {
+    console.log(\`Learning \${skill}\`);
+    return { skill, mastered: true };
+  });
 }
 
-class TechBrutalism {
+class CoolTips {
   constructor() {
-    this.aesthetic = 'High Contrast';
-    this.typography = 'Bricolage Grotesque';
-    this.speed = 'Extreme';
+    this.subscribers = 218;
+    this.videos = 64;
+    this.passion = 'programming';
+  }
+
+  teach() {
+    return 'Learn more and more!';
   }
 }
 
-// Repeating for texture
-function masterLaravel() {
-  const roadmap = ['Basics', 'Eloquent', 'Architecture'];
-  return roadmap.reduce((acc, curr) => acc + ' > ' + curr);
+const tips = new CoolTips();
+tips.teach();
+
+// More content for scrolling
+async function fetchKnowledge() {
+  const response = await fetch('/api/tips');
+  const data = await response.json();
+  return data;
 }
 
-class TechBrutalism {
+function createTutorial() {
+  const skills = ['PHP', 'Laravel', 'JavaScript'];
+  return skills.map(skill => {
+    console.log(\`Learning \${skill}\`);
+    return { skill, mastered: true };
+  });
+}
+
+class CoolTips {
   constructor() {
-    this.aesthetic = 'High Contrast';
-    this.typography = 'Bricolage Grotesque';
-    this.speed = 'Extreme';
+    this.subscribers = 218;
+    this.videos = 64;
+    this.passion = 'programming';
   }
-}
 
-function masterLaravel() {
-  const roadmap = ['Basics', 'Eloquent', 'Architecture'];
-  return roadmap.reduce((acc, curr) => acc + ' > ' + curr);
+  teach() {
+    return 'Learn more and more!';
+  }
 }`}
         </div>
       </div>
 
-      <div className="container relative z-10 px-4">
-        <div className="flex flex-col lg:flex-row items-center lg:items-end gap-12 lg:gap-24">
-          {/* Logo & Side Stats */}
-          <div className="relative group lg:w-1/3 flex flex-col items-center lg:items-start">
-            <div className="relative mb-8 animate-reveal" style={{ animationDelay: '0.1s' }}>
-              <div className="absolute -inset-4 bg-primary/20 blur-2xl group-hover:bg-primary/30 transition-all duration-500 rounded-full" />
-              <Link to="/" className="block relative z-10 transition-transform hover:scale-105 active:scale-95">
-                <img 
-                  src={logo} 
-                  alt="Cool Tips Logo" 
-                  className="w-48 h-48 lg:w-64 lg:h-64 rounded-none border-4 border-foreground object-cover grayscale hover:grayscale-0 transition-all duration-700"
-                />
-              </Link>
-              <div className="absolute -bottom-4 -right-4 bg-primary text-primary-foreground px-4 py-2 font-black text-xl z-20 shadow-card">
-                EST. 2024
-              </div>
+      <div className="container relative z-10 px-4 py-20">
+        <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
+          {/* Logo */}
+          <div className="mb-8 relative animate-float">
+            <img 
+              src={logo} 
+              alt="Cool Tips Logo" 
+              className="w-32 h-32 rounded-full shadow-glow"
+            />
+          </div>
+
+          {/* Channel name */}
+          <h1 className="text-5xl md:text-7xl font-bold mb-4 tracking-tight">
+            <span className="text-gradient">Cool</span>{" "}
+            <span className="text-foreground">Tips</span>
+          </h1>
+
+          {/* Tagline */}
+          <p className="text-xl md:text-2xl text-muted-foreground mb-2 font-medium">
+            @coooltips
+          </p>
+          <p className="text-2xl md:text-3xl font-semibold text-foreground mb-6">
+            LEARN MORE AND MORE
+          </p>
+
+          {/* Stats */}
+          <div className="flex gap-8 mb-10 text-muted-foreground">
+            <div className="flex flex-col items-center">
+              <span className="text-3xl font-bold text-foreground">218</span>
+              <span className="text-sm">Subscribers</span>
             </div>
-            
-            <div className="flex gap-12 animate-reveal" style={{ animationDelay: '0.2s' }}>
-              <div className="flex flex-col">
-                <span className="text-4xl lg:text-5xl font-black text-foreground">216</span>
-                <span className="text-xs uppercase tracking-[0.2em] font-bold text-muted-foreground">{t('hero.subscribers')}</span>
-              </div>
-              <div className="flex flex-col">
-                <span className="text-4xl lg:text-5xl font-black text-foreground">64</span>
-                <span className="text-xs uppercase tracking-[0.2em] font-bold text-muted-foreground">{t('hero.tutorials')}</span>
-              </div>
+            <div className="w-px bg-border" />
+            <div className="flex flex-col items-center">
+              <span className="text-3xl font-bold text-foreground">64</span>
+              <span className="text-sm">Videos</span>
             </div>
           </div>
 
-          {/* Main Content */}
-          <div className="flex-1 text-center lg:text-left rtl:lg:text-right">
-            <div className="inline-block px-3 py-1 bg-accent text-accent-foreground font-bold text-xs uppercase tracking-widest mb-6 animate-reveal" style={{ animationDelay: '0.3s' }}>
-              {t('hero.badge')}
-            </div>
-            
-            <h1 className="text-6xl md:text-8xl lg:text-9xl font-black mb-6 leading-[0.9] animate-reveal" style={{ animationDelay: '0.4s' }}>
-              <span className="block italic text-primary">{t('hero.title_cool')}</span>
-              <span className="block text-foreground">{t('hero.title_tips')}</span>
-            </h1>
+          {/* Description */}
+          <p className="text-lg text-muted-foreground mb-10 max-w-2xl leading-relaxed">
+            We are friends who love <span className="text-primary font-semibold">#programming</span> and we want to help make it popular with our tutorials and tips. Join us on this coding journey!
+          </p>
 
-            <p className="text-xl md:text-2xl text-foreground font-bold mb-8 max-w-xl animate-reveal leading-tight" style={{ animationDelay: '0.5s' }}>
-              {t('hero.description')}
-            </p>
+          {/* CTAs */}
+          <div className="flex flex-col sm:flex-row gap-4">
+            <Button 
+              size="lg" 
+              className="bg-gradient-primary hover:opacity-90 text-primary-foreground gap-2 px-8 shadow-glow transition-all duration-300"
+              asChild
+            >
+              <a href="https://www.youtube.com/@coooltips" target="_blank" rel="noopener noreferrer">
+                <Youtube className="w-5 h-5" />
+                Subscribe Now
+              </a>
+            </Button>
+            <Button 
+              size="lg" 
+              variant="outline"
+              className="border-primary/50 text-foreground hover:bg-primary/10 gap-2 px-8"
+              asChild
+            >
+              <a href="https://www.youtube.com/@coooltips/videos" target="_blank" rel="noopener noreferrer">
+                <Play className="w-5 h-5" />
+                Watch Videos
+              </a>
+            </Button>
           </div>
         </div>
       </div>
 
-      {/* Background Bubbly Elements */}
-      <div className="absolute top-20 right-20 w-12 h-12 rounded-full bg-accent animate-bounce-slow opacity-20" />
-      <div className="absolute bottom-40 left-40 w-16 h-16 rounded-full bg-primary animate-bounce-slow opacity-30" style={{ animationDelay: '1.5s' }} />
+      {/* Bottom gradient fade */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent" />
     </section>
   );
 };
-
 
 export default HeroSection;
