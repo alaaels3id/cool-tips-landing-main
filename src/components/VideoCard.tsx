@@ -17,7 +17,7 @@ const VideoCard = ({ video, index, onClick, showEntryNumber = false }: VideoCard
       className="bubble-card group relative p-6 cursor-pointer animate-reveal h-full flex flex-col"
       onClick={() => onClick(video)}
     >
-      <div className="relative aspect-video rounded-[2rem] overflow-hidden border-4 border-foreground mb-6 transition-transform group-hover:scale-[1.02] group-hover:rotate-1 isolate">
+      <div className="relative aspect-video rounded-none overflow-hidden border-4 border-foreground mb-6 transition-transform group-hover:scale-[1.02] group-hover:rotate-1 isolate">
         <img
           src={`https://img.youtube.com/vi/${video.id}/maxresdefault.jpg`}
           alt={video.title}
@@ -31,7 +31,7 @@ const VideoCard = ({ video, index, onClick, showEntryNumber = false }: VideoCard
           }}
         />
         <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[2px]">
-          <div className="w-20 h-20 rounded-full bg-foreground text-background flex items-center justify-center animate-wiggle">
+          <div className="w-20 h-20 rounded-none bg-foreground text-background flex items-center justify-center animate-wiggle">
             <Play className="w-10 h-10 fill-current ml-1 rtl:rotate-180" />
           </div>
         </div>
@@ -39,7 +39,7 @@ const VideoCard = ({ video, index, onClick, showEntryNumber = false }: VideoCard
 
       <div className="px-2 flex-1 flex flex-col">
         <div className="flex items-center gap-4 mb-4">
-          <span className="text-xs font-bold uppercase tracking-widest bg-secondary text-secondary-foreground px-3 py-1 rounded-full border-2 border-foreground">
+          <span className="text-xs font-bold uppercase tracking-widest bg-secondary text-secondary-foreground px-3 py-1 rounded-none border-2 border-foreground">
             {showEntryNumber
               ? `${t('archive.entry')}_${String(index + 1).padStart(3, '0')}`
               : `${t('featured.lesson')} #${index + 1}`

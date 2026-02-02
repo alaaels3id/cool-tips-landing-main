@@ -52,9 +52,11 @@ export default {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
+        none: "0",
+        DEFAULT: "0",
       },
       fontFamily: {
-        sans: ['Space Grotesk', 'sans-serif'],
+        sans: ['Inter', 'sans-serif'],
         mono: ['JetBrains Mono', 'monospace'],
       },
       keyframes: {

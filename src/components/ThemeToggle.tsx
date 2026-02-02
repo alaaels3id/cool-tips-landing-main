@@ -21,7 +21,7 @@ export function ThemeToggle() {
         variant="outline"
         size="icon"
         onClick={() => setTheme(currentTheme === "dark" ? "light" : "dark")}
-        className="w-16 h-16 rounded-xl border-2 border-primary bg-black/50 backdrop-blur-md text-primary shadow-[0_0_15px_rgba(255,0,255,0.5)] hover:shadow-[0_0_30px_rgba(255,0,255,0.8)] hover:scale-110 transition-all duration-300 relative group active:scale-95 flex items-center justify-center overflow-hidden"
+        className="w-16 h-16 rounded-none border-2 border-primary bg-black/50 backdrop-blur-md text-primary shadow-[0_0_15px_rgba(255,0,255,0.5)] hover:shadow-[0_0_30px_rgba(255,0,255,0.8)] hover:scale-110 transition-all duration-300 relative group active:scale-95 flex items-center justify-center overflow-hidden"
       >
         <div className="absolute inset-0 bg-primary/10 group-hover:bg-primary/20 transition-colors" />
 
