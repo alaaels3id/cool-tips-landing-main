@@ -25,7 +25,7 @@ const Footer = () => {
                 <span className="font-bold text-4xl tracking-tighter uppercase mb-1">
                   {t('hero.title_cool')} <span className="text-primary italic">{t('hero.title_tips')}!</span>
                 </span>
-                <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground bg-foreground text-background px-2 py-0.5 rounded-full inline-block">
+                <span className="text-xs font-bold uppercase tracking-widest bg-foreground text-background px-2 py-0.5 rounded-full inline-block">
                   {t('footer.badge')}
                 </span>
               </div>

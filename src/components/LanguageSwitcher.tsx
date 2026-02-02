@@ -28,8 +28,8 @@ const LanguageSwitcher = () => {
         <div className="absolute -top-1 -right-1 w-3 h-3 bg-blue-500 border border-foreground" />
         <span className="sr-only">Toggle language</span>
       </Button>
-      <div className="absolute right-20 bottom-0 overflow-hidden whitespace-nowrap pointer-events-none group-hover:opacity-100 opacity-0 transition-opacity">
-        <span className="font-mono text-[10px] bg-foreground text-background px-2 py-1 uppercase font-black">
+      <div className="absolute bottom-full right-0 mb-6 overflow-hidden whitespace-nowrap pointer-events-none group-hover:opacity-100 opacity-0 transition-opacity">
+        <span className="font-mono text-[10px] bg-foreground text-background px-3 py-1.5 uppercase font-black rounded-sm shadow-tactile">
           Language_{i18n.language?.toUpperCase()}
         </span>
       </div>

@@ -25,7 +25,7 @@ export function ThemeToggle() {
         <div className="absolute -top-1 -right-1 w-6 h-6 bg-accent border-4 border-foreground rounded-full animate-pulse" />
         <span className="sr-only">Toggle theme</span>
       </Button>
-      <div className="absolute left-24 bottom-2 overflow-hidden whitespace-nowrap pointer-events-none group-hover:opacity-100 opacity-0 transition-opacity">
+      <div className="absolute bottom-full left-0 mb-6 overflow-hidden whitespace-nowrap pointer-events-none group-hover:opacity-100 opacity-0 transition-opacity">
         <span className="font-bold text-xs bg-foreground text-background px-4 py-1.5 rounded-full uppercase tracking-widest shadow-tactile-hover">
           Mode: {theme === 'dark' ? 'Nighty' : 'Sunny'}!
         </span>
