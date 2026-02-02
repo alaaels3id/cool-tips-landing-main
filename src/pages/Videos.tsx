@@ -56,7 +56,7 @@ const Videos = () => {
                   </span>
                 </span>
                 <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground bg-foreground text-background px-2 py-0.5 rounded-full inline-block">
-                  Video_Palooza_v2
+                  {t('footer.badge')}
                 </span>
               </div>
             </Link>
