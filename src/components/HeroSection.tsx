@@ -9,10 +9,10 @@ const HeroSection = () => {
       <div className="absolute inset-0 bg-gradient-glow opacity-50" />
       <div className="absolute top-20 left-10 w-72 h-72 bg-primary/20 rounded-full blur-3xl animate-pulse-slow" />
       <div className="absolute bottom-20 right-10 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse-slow" style={{ animationDelay: '2s' }} />
-      
+
       {/* Code background decoration */}
-      <div className="absolute left-0 top-0 h-full w-1/3 overflow-hidden opacity-10 pointer-events-none">
-        <div className="font-mono text-xs text-primary animate-code-scroll whitespace-pre leading-relaxed">
+      <div className="absolute left-0 top-0 h-full w-1/3 overflow-hidden opacity-20 pointer-events-none">
+        <div className="font-mono text-xs text-foreground/80 dark:text-foreground/60 animate-code-scroll whitespace-pre leading-relaxed">
           {`function createTutorial() {
   const skills = ['PHP', 'Laravel', 'JavaScript'];
   return skills.map(skill => {
@@ -69,9 +69,9 @@ class CoolTips {
         <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
           {/* Logo */}
           <div className="mb-8 relative animate-float">
-            <img 
-              src={logo} 
-              alt="Cool Tips Logo" 
+            <img
+              src={logo}
+              alt="Cool Tips Logo"
               className="w-32 h-32 rounded-full shadow-glow"
             />
           </div>
@@ -110,8 +110,8 @@ class CoolTips {
 
           {/* CTAs */}
           <div className="flex flex-col sm:flex-row gap-4">
-            <Button 
-              size="lg" 
+            <Button
+              size="lg"
               className="bg-gradient-primary hover:opacity-90 text-primary-foreground gap-2 px-8 shadow-glow transition-all duration-300"
               asChild
             >
@@ -120,8 +120,8 @@ class CoolTips {
                 Subscribe Now
               </a>
             </Button>
-            <Button 
-              size="lg" 
+            <Button
+              size="lg"
               variant="outline"
               className="border-primary/50 text-foreground hover:bg-primary/10 gap-2 px-8"
               asChild
