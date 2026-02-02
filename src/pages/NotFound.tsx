@@ -24,10 +24,10 @@ const NotFound = () => {
           <p className="text-2xl md:text-3xl font-bold text-foreground/60 mb-12 max-w-lg mx-auto leading-tight">
             {t('not_found.description')}
           </p>
-          <Button 
+          <Button
             size="lg"
             asChild
-            className="h-20 px-12 rounded-full bg-primary text-primary-foreground font-bold text-2xl border-4 border-foreground shadow-tactile hover:translate-x-[-4px] hover:translate-y-[-4px] hover:shadow-[12px_12px_0px_0px_#222] transition-all"
+            className="h-20 px-12 rounded-full bg-primary text-primary-foreground dark:text-black font-bold text-2xl border-4 border-foreground shadow-tactile hover:translate-x-[-4px] hover:translate-y-[-4px] hover:shadow-[12px_12px_0px_0px_#222] transition-all"
           >
             <Link to="/" className="flex items-center gap-4">
               <Home className="w-8 h-8" />

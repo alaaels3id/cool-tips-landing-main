@@ -40,6 +40,7 @@ const PaginationLink = ({ className, isActive, size = "icon", ...props }: Pagina
         size,
       }),
       className,
+      "dark:text-black"
     )}
     {...props}
   />

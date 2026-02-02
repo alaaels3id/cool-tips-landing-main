@@ -13,7 +13,7 @@ const Footer = () => {
           <div key={i} className="w-2 h-2 rounded-full bg-primary animate-bounce" style={{ animationDelay: `${i * 0.1}s` }} />
         ))}
       </div>
-      
+
       <div className="container px-4">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-16 mb-24">
           <div className="flex flex-col items-center lg:items-start text-center lg:text-left gap-8">
@@ -25,7 +25,7 @@ const Footer = () => {
                 <span className="font-bold text-4xl tracking-tighter uppercase mb-1">
                   {t('hero.title_cool')} <span className="text-primary italic">{t('hero.title_tips')}!</span>
                 </span>
-                <span className="text-xs font-bold uppercase tracking-widest bg-foreground text-background px-2 py-0.5 rounded-full inline-block">
+                <span className="text-xs font-bold uppercase tracking-widest bg-foreground text-background dark:text-black px-2 py-0.5 rounded-full inline-block">
                   {t('footer.badge')}
                 </span>
               </div>
@@ -54,7 +54,7 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        
+
         <div className="pt-12 border-t-4 border-foreground/10 flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="flex items-center gap-3">
             <div className="w-4 h-4 rounded-full bg-secondary animate-pulse" />
