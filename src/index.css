@@ -4,73 +4,73 @@
 
 @layer base {
   :root {
-    --background: 150 100% 98%; /* Soft Mint */
-    --foreground: 220 20% 15%;
+    --background: 0 0% 100%; /* Pure White */
+    --foreground: 0 0% 0%; /* Pure Black */
 
     --card: 0 0% 100%;
-    --card-foreground: 220 20% 15%;
+    --card-foreground: 0 0% 0%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 220 20% 15%;
+    --popover-foreground: 0 0% 0%;
 
-    --primary: 330 80% 60%; /* Bubblegum Pink */
+    --primary: 0 0% 0%; /* Black */
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 200 80% 60%; /* Electric Blue */
-    --secondary-foreground: 0 0% 100%;
+    --secondary: 0 0% 90%; /* Light Gray for secondary */
+    --secondary-foreground: 0 0% 0%;
 
-    --muted: 150 20% 90%;
-    --muted-foreground: 150 10% 40%;
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45%;
 
-    --accent: 40 95% 60%; /* Sunny Orange */
+    --accent: 0 0% 0%; /* Black accent */
     --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 100% 50%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 220 20% 15%; /* Thick, dark borders */
-    --input: 220 20% 15%;
-    --ring: 330 80% 60%;
+    --border: 0 0% 0%; /* Black Borders */
+    --input: 0 0% 0%;
+    --ring: 0 0% 0%;
 
-    --radius: 2.5rem; /* Ultra rounded bubbly corners */
+    --radius: 0px; /* Sharp corners */
 
-    --shadow-tactile: 8px 8px 0px 0px hsl(220, 20%, 15%);
-    --shadow-tactile-hover: 4px 4px 0px 0px hsl(220, 20%, 15%);
-    --shadow-bubble: 0 10px 30px -10px hsla(330, 80%, 60%, 0.3);
+    --shadow-tactile: 4px 4px 0px 0px rgba(0, 0, 0, 1);
+    --shadow-tactile-hover: 2px 2px 0px 0px rgba(0, 0, 0, 1);
+    --shadow-bubble: 5px 5px 0px 0px rgba(0, 0, 0, 0.2);
   }
 
   .dark {
-    --background: 260 40% 10%; /* Deep Grape */
-    --foreground: 180 100% 90%; /* Neon Cyan */
+    --background: 0 0% 5%; /* Almost Black */
+    --foreground: 0 0% 100%; /* White */
 
-    --card: 260 40% 15%;
-    --card-foreground: 180 100% 90%;
+    --card: 0 0% 5%;
+    --card-foreground: 0 0% 100%;
 
-    --popover: 260 40% 15%;
-    --popover-foreground: 180 100% 90%;
+    --popover: 0 0% 5%;
+    --popover-foreground: 0 0% 100%;
 
-    --primary: 180 100% 50%; /* Pure Cyan */
-    --primary-foreground: 260 40% 10%;
+    --primary: 0 0% 100%; /* White */
+    --primary-foreground: 0 0% 0%;
 
-    --secondary: 320 100% 60%; /* Hot Pink */
-    --secondary-foreground: 260 40% 10%;
+    --secondary: 0 0% 15%;
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: 260 30% 20%;
-    --muted-foreground: 260 20% 60%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 65%;
 
-    --accent: 280 100% 70%; /* Vibrant Purple */
-    --accent-foreground: 260 40% 10%;
+    --accent: 0 0% 100%;
+    --accent-foreground: 0 0% 0%;
 
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 98%;
+    --destructive: 0 100% 60%;
+    --destructive-foreground: 0 0% 0%;
 
-    --border: 180 100% 50%;
-    --input: 180 100% 50%;
-    --ring: 180 100% 50%;
+    --border: 0 0% 100%; /* White Borders */
+    --input: 0 0% 100%;
+    --ring: 0 0% 100%;
 
-    --shadow-tactile: 8px 8px 0px 0px hsla(180, 100%, 50%, 0.5);
-    --shadow-tactile-hover: 4px 4px 0px 0px hsla(180, 100%, 50%, 0.5);
-    --shadow-bubble: 0 10px 40px -10px hsla(180, 100%, 50%, 0.4);
+    --shadow-tactile: 4px 4px 0px 0px rgba(255, 255, 255, 1);
+    --shadow-tactile-hover: 2px 2px 0px 0px rgba(255, 255, 255, 1);
+    --shadow-bubble: 5px 5px 0px 0px rgba(255, 255, 255, 0.2);
   }
 }
 
@@ -81,14 +81,24 @@
 
   body {
     @apply bg-background text-foreground antialiased;
-    font-family: 'Public Sans', sans-serif;
-    background-image: radial-gradient(circle at 2px 2px, rgba(0,0,0,0.05) 1px, transparent 0);
-    background-size: 40px 40px;
+    font-family: "Space Grotesk", "Public Sans", sans-serif;
+    /* Optional: Grid background for that brutalist feel */
+    background-image:
+      linear-gradient(to right, #80808012 1px, transparent 1px),
+      linear-gradient(to bottom, #80808012 1px, transparent 1px);
+    background-size: 24px 24px;
+    border: 4px solid hsl(var(--foreground)); /* Frame the whole page */
+    min-height: 100vh;
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    font-family: 'Fredoka', sans-serif;
-    @apply font-bold tracking-tight;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Space Grotesk", sans-serif;
+    @apply font-bold tracking-tight uppercase; /* Uppercase for extra impact */
   }
 }
 
@@ -105,8 +115,14 @@
     box-shadow: var(--shadow-bubble);
   }
 
+  /* Renaming/Redefining the card style to fittingly brutal */
   .bubble-card {
-    @apply bg-card border-4 border-foreground rounded-[3rem] shadow-tactile transition-all hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-tactile-hover active:translate-x-[2px] active:translate-y-[2px] active:shadow-none;
+    @apply bg-card border-2 border-foreground rounded-none shadow-tactile transition-all hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-tactile-hover active:translate-x-[2px] active:translate-y-[2px] active:shadow-none;
+  }
+
+  /* Helper for solid buttons */
+  .btn-brutal {
+    @apply bg-primary text-primary-foreground border-2 border-primary px-6 py-3 font-bold uppercase tracking-wider hover:bg-background hover:text-primary transition-colors duration-200 shadow-tactile active:translate-x-[2px] active:translate-y-[2px] active:shadow-none;
   }
 
   .squish-hover {
@@ -122,24 +138,26 @@
   }
 
   @keyframes bounce-slow {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-30px); }
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    } /* Less bounce */
   }
 
   @keyframes wiggle {
-    0%, 100% { transform: rotate(-3deg); }
-    50% { transform: rotate(3deg); }
+    0%,
+    100% {
+      transform: rotate(-1deg);
+    }
+    50% {
+      transform: rotate(1deg);
+    }
   }
 
   .noise-texture {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0.03;
-    z-index: 9999;
-    pointer-events: none;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    display: none; /* Clean look is usually better for minimal brutalism, but can enable if desired */
   }
 }
