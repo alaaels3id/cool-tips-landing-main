@@ -13,11 +13,11 @@ const VideoCard = ({ video, index, onClick, showEntryNumber = false }: VideoCard
   const { t } = useTranslation();
 
   return (
-    <div 
+    <div
       className="bubble-card group relative p-6 cursor-pointer animate-reveal h-full flex flex-col"
       onClick={() => onClick(video)}
     >
-      <div className="relative aspect-video rounded-[2rem] overflow-hidden border-4 border-foreground mb-6 transition-transform group-hover:scale-[1.02] group-hover:rotate-1">
+      <div className="relative aspect-video rounded-[2rem] overflow-hidden border-4 border-foreground mb-6 transition-transform group-hover:scale-[1.02] group-hover:rotate-1 isolate">
         <img
           src={`https://img.youtube.com/vi/${video.id}/maxresdefault.jpg`}
           alt={video.title}
@@ -40,7 +40,7 @@ const VideoCard = ({ video, index, onClick, showEntryNumber = false }: VideoCard
       <div className="px-2 flex-1 flex flex-col">
         <div className="flex items-center gap-4 mb-4">
           <span className="text-xs font-bold uppercase tracking-widest bg-secondary text-secondary-foreground px-3 py-1 rounded-full border-2 border-foreground">
-            {showEntryNumber 
+            {showEntryNumber
               ? `${t('archive.entry')}_${String(index + 1).padStart(3, '0')}`
               : `${t('featured.lesson')} #${index + 1}`
             }
