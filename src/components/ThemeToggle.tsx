@@ -21,23 +21,32 @@ export function ThemeToggle() {
         variant="outline"
         size="icon"
         onClick={() => setTheme(currentTheme === "dark" ? "light" : "dark")}
-        className="w-20 h-20 rounded-none border-4 border-foreground bg-background text-foreground shadow-tactile hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-tactile-hover transition-all duration-300 relative group active:scale-90 flex items-center justify-center"
+        className="w-16 h-16 rounded-xl border-2 border-primary bg-black/50 backdrop-blur-md text-primary shadow-[0_0_15px_rgba(255,0,255,0.5)] hover:shadow-[0_0_30px_rgba(255,0,255,0.8)] hover:scale-110 transition-all duration-300 relative group active:scale-95 flex items-center justify-center overflow-hidden"
       >
-        <div className="relative w-10 h-10 flex items-center justify-center">
-          <Sun className={`absolute h-10 w-10 transition-all duration-500 group-hover:text-primary 
+        <div className="absolute inset-0 bg-primary/10 group-hover:bg-primary/20 transition-colors" />
+
+        {/* Scanning line effect inside button */}
+        <div className="absolute inset-0 h-[2px] w-full bg-primary/50 animate-[scan_2s_ease-in-out_infinite] opacity-0 group-hover:opacity-100" />
+
+        <div className="relative w-8 h-8 flex items-center justify-center">
+          <Sun className={`absolute h-8 w-8 transition-all duration-500 text-primary drop-shadow-[0_0_5px_rgba(255,0,255,0.8)]
             ${currentTheme === 'dark' ? 'rotate-90 scale-0 opacity-0' : 'rotate-0 scale-100 opacity-100'}`}
           />
-          <Moon className={`absolute h-10 w-10 transition-all duration-500 group-hover:text-secondary 
+          <Moon className={`absolute h-8 w-8 transition-all duration-500 text-secondary drop-shadow-[0_0_5px_rgba(0,255,255,0.8)]
             ${currentTheme === 'dark' ? 'rotate-0 scale-100 opacity-100' : '-rotate-90 scale-0 opacity-0'}`}
           />
         </div>
-        <div className="absolute -top-1 -right-1 w-4 h-4 bg-accent border-2 border-foreground rounded-none animate-pulse" />
         <span className="sr-only">Toggle theme</span>
       </Button>
-      <div className="absolute bottom-full left-0 mb-6 overflow-hidden whitespace-nowrap pointer-events-none group-hover:opacity-100 opacity-0 transition-opacity">
-        <span className="font-bold text-xs bg-foreground text-background px-4 py-2 rounded-none uppercase tracking-widest shadow-tactile-hover border border-background">
-          {currentTheme === 'dark' ? 'DARK MODE' : 'LIGHT MODE'}
-        </span>
+
+      {/* Label */}
+      <div className="absolute bottom-full left-0 mb-4 overflow-hidden whitespace-nowrap pointer-events-none group-hover:opacity-100 opacity-0 transition-opacity duration-300">
+        <div className="flex items-center gap-2">
+          <div className="h-[1px] w-8 bg-primary/50"></div>
+          <span className="font-['Orbitron'] font-bold text-xs text-primary tracking-widest uppercase drop-shadow-[0_0_5px_rgba(255,0,255,0.8)]">
+            {currentTheme === 'dark' ? 'SYSTEM: NIGHT' : 'SYSTEM: DAY'}
+          </span>
+        </div>
       </div>
     </div>
   )

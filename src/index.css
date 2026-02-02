@@ -1,76 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;500;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    --background: 0 0% 100%; /* Pure White */
-    --foreground: 0 0% 0%; /* Pure Black */
+    /* Cyber Day: High contrast base with neon accents */
+    --background: 0 0% 98%; /* Tech White */
+    --foreground: 260 50% 5%; /* Deep Space Black */
 
     --card: 0 0% 100%;
-    --card-foreground: 0 0% 0%;
+    --card-foreground: 260 50% 5%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 0%;
+    --popover-foreground: 260 50% 5%;
 
-    --primary: 0 0% 0%; /* Black */
+    --primary: 320 100% 50%; /* Neon Pink - Keeps the vibe */
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 0 0% 90%; /* Light Gray for secondary */
-    --secondary-foreground: 0 0% 0%;
+    --secondary: 190 100% 40%; /* Cyan - Slightly darker for contrast on white */
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: 0 0% 96%;
-    --muted-foreground: 0 0% 45%;
+    --muted: 260 20% 94%;
+    --muted-foreground: 260 20% 40%;
 
-    --accent: 0 0% 0%; /* Black accent */
+    --accent: 280 100% 60%; /* Neon Purple */
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 100% 50%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 0 0% 0%; /* Black Borders */
-    --input: 0 0% 0%;
-    --ring: 0 0% 0%;
+    --border: 320 100% 50%; /* Pink Borders still pop on white */
+    --input: 260 20% 90%;
+    --ring: 190 100% 50%;
+    
+    --radius: 0.5rem;
 
-    --radius: 0px; /* Sharp corners */
-
-    --shadow-tactile: 4px 4px 0px 0px rgba(0, 0, 0, 1);
-    --shadow-tactile-hover: 2px 2px 0px 0px rgba(0, 0, 0, 1);
-    --shadow-bubble: 5px 5px 0px 0px rgba(0, 0, 0, 0.2);
+    /* Glows adapted for light mode - slightly more subtle or different opacity */
+    --glow-primary: 0 0 10px hsla(320, 100%, 50%, 0.5), 0 0 15px hsla(320, 100%, 50%, 0.3);
+    --glow-secondary: 0 0 10px hsla(190, 100%, 40%, 0.5), 0 0 15px hsla(190, 100%, 40%, 0.3);
+    --glow-text: 0 0 2px hsla(190, 100%, 40%, 0.3); /* Less intense text glow for readability */
   }
 
   .dark {
-    --background: 0 0% 5%; /* Almost Black */
-    --foreground: 0 0% 100%; /* White */
-
-    --card: 0 0% 5%;
-    --card-foreground: 0 0% 100%;
-
-    --popover: 0 0% 5%;
-    --popover-foreground: 0 0% 100%;
-
-    --primary: 0 0% 100%; /* White */
-    --primary-foreground: 0 0% 0%;
-
-    --secondary: 0 0% 15%;
-    --secondary-foreground: 0 0% 100%;
-
-    --muted: 0 0% 15%;
-    --muted-foreground: 0 0% 65%;
-
-    --accent: 0 0% 100%;
-    --accent-foreground: 0 0% 0%;
-
-    --destructive: 0 100% 60%;
-    --destructive-foreground: 0 0% 0%;
-
-    --border: 0 0% 100%; /* White Borders */
-    --input: 0 0% 100%;
-    --ring: 0 0% 100%;
-
-    --shadow-tactile: 4px 4px 0px 0px rgba(255, 255, 255, 1);
-    --shadow-tactile-hover: 2px 2px 0px 0px rgba(255, 255, 255, 1);
-    --shadow-bubble: 5px 5px 0px 0px rgba(255, 255, 255, 0.2);
+    /* Retro-futuristic is dark by default, but we can have a 'light' cyber mode or just keep it consistent */
+    --background: 260 50% 5%;
+    --foreground: 180 100% 90%;
+    --card: 260 50% 10%;
+    --card-foreground: 180 100% 90%;
+    --popover: 260 50% 10%;
+    --popover-foreground: 180 100% 90%;
+    --primary: 320 100% 50%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 190 100% 50%;
+    --secondary-foreground: 260 50% 5%;
+    --muted: 260 50% 20%;
+    --muted-foreground: 260 30% 60%;
+    --accent: 280 100% 60%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 100% 50%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 320 100% 50%;
+    --input: 260 50% 20%;
+    --ring: 190 100% 50%;
   }
 }
 
@@ -81,83 +74,82 @@
 
   body {
     @apply bg-background text-foreground antialiased;
-    font-family: "Space Grotesk", "Public Sans", sans-serif;
-    /* Optional: Grid background for that brutalist feel */
-    background-image:
-      linear-gradient(to right, #80808012 1px, transparent 1px),
-      linear-gradient(to bottom, #80808012 1px, transparent 1px);
-    background-size: 24px 24px;
-    border: 4px solid hsl(var(--foreground)); /* Frame the whole page */
-    min-height: 100vh;
+    font-family: 'Rajdhani', sans-serif;
+    
+    /* Cyber Grid Background */
+    background-image: 
+      linear-gradient(rgba(0, 255, 255, 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 40px 40px;
+    background-position: center top;
   }
 
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    font-family: "Space Grotesk", sans-serif;
-    @apply font-bold tracking-tight uppercase; /* Uppercase for extra impact */
+  /* Make headings feel techy */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Orbitron', sans-serif;
+    @apply font-bold tracking-widest uppercase text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary drop-shadow-[0_0_10px_rgba(255,0,255,0.5)];
   }
 }
 
 @layer utilities {
-  .shadow-tactile {
-    box-shadow: var(--shadow-tactile);
+  .text-glow {
+    text-shadow: var(--glow-text);
   }
 
-  .shadow-tactile-hover {
-    box-shadow: var(--shadow-tactile-hover);
+  .shadow-glow {
+    box-shadow: var(--glow-primary);
   }
 
-  .shadow-bubble {
-    box-shadow: var(--shadow-bubble);
+  .shadow-glow-sec {
+    box-shadow: var(--glow-secondary);
   }
 
-  /* Renaming/Redefining the card style to fittingly brutal */
-  .bubble-card {
-    @apply bg-card border-2 border-foreground rounded-none shadow-tactile transition-all hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-tactile-hover active:translate-x-[2px] active:translate-y-[2px] active:shadow-none;
+  /* Retro Card: Glassy with neon border */
+  .retro-card {
+    @apply bg-card/80 backdrop-blur-sm border border-primary/50 shadow-[0_0_15px_rgba(255,0,255,0.3)] transition-all duration-300 hover:shadow-[0_0_25px_rgba(255,0,255,0.6)] hover:border-primary hover:-translate-y-1 relative overflow-hidden;
+  }
+  
+  /* Scanline effect overlay for cards */
+  .retro-card::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent 50%, rgba(0, 0, 0, 0.1) 50%);
+    background-size: 100% 4px;
+    pointer-events: none;
+    opacity: 0.3;
   }
 
-  /* Helper for solid buttons */
-  .btn-brutal {
-    @apply bg-primary text-primary-foreground border-2 border-primary px-6 py-3 font-bold uppercase tracking-wider hover:bg-background hover:text-primary transition-colors duration-200 shadow-tactile active:translate-x-[2px] active:translate-y-[2px] active:shadow-none;
+  .btn-retro {
+    @apply relative overflow-hidden bg-transparent border-2 border-secondary text-secondary font-bold uppercase tracking-wider py-2 px-6 transition-all duration-300 hover:bg-secondary hover:text-black hover:shadow-[0_0_20px_rgba(0,255,255,0.8)] active:scale-95;
+    font-family: 'Orbitron', sans-serif;
+  }
+  
+  .btn-retro-primary {
+    @apply relative overflow-hidden bg-primary/20 border-2 border-primary text-primary font-bold uppercase tracking-wider py-2 px-6 transition-all duration-300 hover:bg-primary hover:text-white hover:shadow-[0_0_20px_rgba(255,0,255,0.8)] active:scale-95;
+    font-family: 'Orbitron', sans-serif;
   }
 
-  .squish-hover {
-    @apply transition-transform duration-300 hover:scale-105 active:scale-95;
-  }
-
-  .animate-bounce-slow {
-    animation: bounce-slow 4s infinite cubic-bezier(0.45, 0, 0.55, 1);
-  }
-
-  .animate-wiggle {
-    animation: wiggle 0.5s ease-in-out infinite;
-  }
-
-  @keyframes bounce-slow {
-    0%,
-    100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-10px);
-    } /* Less bounce */
-  }
-
-  @keyframes wiggle {
-    0%,
-    100% {
-      transform: rotate(-1deg);
-    }
-    50% {
-      transform: rotate(1deg);
-    }
-  }
-
-  .noise-texture {
-    display: none; /* Clean look is usually better for minimal brutalism, but can enable if desired */
+  /* CRT Scanline global overlay option */
+  .scanlines {
+    background: linear-gradient(
+      to bottom,
+      rgba(255,255,255,0),
+      rgba(255,255,255,0) 50%,
+      rgba(0,0,0,0.2) 50%,
+      rgba(0,0,0,0.2)
+    );
+    background-size: 100% 4px;
+    position: fixed;
+    top: 0; 
+    right: 0; 
+    bottom: 0; 
+    left: 0;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0.15;
   }
 }

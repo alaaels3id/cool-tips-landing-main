@@ -7,20 +7,27 @@ const Footer = () => {
 
   return (
     <footer className="py-24 border-t-8 border-foreground bg-background overflow-hidden relative">
-      {/* Decorative Bubbles Removed for Brutalism */}
+      {/* Retro Grid Dots Decoration */}
+      <div className="absolute bottom-0 left-0 w-full h-full pointer-events-none opacity-20 overflow-hidden">
+        <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-primary to-transparent" />
+        {[...Array(5)].map((_, i) => (
+          <div key={i} className="absolute bottom-4 left-[10%] w-1 h-1 rounded-full bg-primary shadow-[0_0_10px_#ff00ff] animate-pulse" style={{ left: `${10 + i * 20}%`, animationDelay: `${i * 0.5}s` }} />
+        ))}
+      </div>
 
       <div className="container px-4">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-16 mb-24">
           <div className="flex flex-col items-center lg:items-start text-center lg:text-left gap-8">
             <Link to="/" className="flex items-center gap-6 group hover:text-primary transition-colors">
-              <div className="w-20 h-20 rounded-none bg-background p-2 border-4 border-foreground shadow-tactile group-hover:shadow-tactile-hover group-hover:-translate-y-1 group-active:translate-y-0.5 transition-all">
-                <img src={logo} alt="Cool Tips" className="w-full h-full object-contain" />
+              <div className="w-20 h-20 rounded-2xl bg-black/50 backdrop-blur-sm p-3 border-2 border-primary shadow-[0_0_15px_rgba(255,0,255,0.4)] group-hover:shadow-[0_0_25px_rgba(255,0,255,0.7)] group-hover:-translate-y-1 transition-all overflow-hidden relative">
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent opacity-50" />
+                <img src={logo} alt="Cool Tips" className="w-full h-full object-contain relative z-10 drop-shadow-[0_0_5px_rgba(255,255,255,0.5)]" />
               </div>
               <div className="flex flex-col leading-none">
                 <span className="font-bold text-4xl tracking-tighter uppercase mb-1">
                   {t('hero.title_cool')} <span className="text-primary italic">{t('hero.title_tips')}!</span>
                 </span>
-                <span className="text-xs font-bold uppercase tracking-widest bg-foreground text-background dark:text-black px-2 py-0.5 rounded-none inline-block border border-background">
+                <span className="text-xs font-bold uppercase tracking-widest bg-primary/10 text-primary border border-primary/50 px-2 py-0.5 rounded-md inline-block shadow-[0_0_10px_rgba(255,0,255,0.3)] backdrop-blur-sm">
                   {t('footer.badge')}
                 </span>
               </div>
@@ -52,7 +59,7 @@ const Footer = () => {
 
         <div className="pt-12 border-t-4 border-foreground/10 flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="flex items-center gap-3">
-            <div className="w-4 h-4 rounded-none bg-secondary animate-pulse" />
+            <div className="w-3 h-3 rounded-full bg-secondary shadow-[0_0_10px_#00ffff] animate-pulse" />
             <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground">
               {t('footer.status')}
             </span>
