@@ -4,8 +4,6 @@ const topics = [
   { icon: Code, name: "PHP", color: "text-blue-400" },
   { icon: Layers, name: "Laravel", color: "text-red-400" },
   { icon: Globe, name: "Web Development", color: "text-green-400" },
-  { icon: Database, name: "MySQL", color: "text-orange-400" },
-  { icon: Terminal, name: "CLI Tools", color: "text-yellow-400" },
   { icon: Cpu, name: "APIs", color: "text-purple-400" },
 ];
 
@@ -22,20 +20,37 @@ const TopicsSection = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-          {topics.map((topic, index) => (
-            <div 
-              key={index}
-              className="group flex flex-col items-center p-6 rounded-xl bg-card border border-border hover:border-primary/50 transition-all duration-300"
-            >
-              <div className={`mb-4 ${topic.color}`}>
-                <topic.icon className="w-10 h-10 group-hover:scale-110 transition-transform duration-300" />
+        <div
+          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-[var(--lg-cols)] gap-4"
+          style={{
+            '--lg-cols': `repeat(${topics.length}, minmax(0, 1fr))`,
+            '--md-cols': `repeat(${Math.min(topics.length, 3)}, minmax(0, 1fr))`,
+          } as React.CSSProperties}
+        >
+          <style dangerouslySetInnerHTML={{
+            __html: `
+            @media (min-width: 1024px) {
+              .dynamic-grid { grid-template-columns: var(--lg-cols) !important; }
+            }
+            @media (min-width: 768px) and (max-width: 1023px) {
+              .dynamic-grid { grid-template-columns: var(--md-cols) !important; }
+            }
+          `}} />
+          <div className="dynamic-grid grid grid-cols-2 md:grid-cols-3 gap-4 lg:grid-cols-none md:grid-cols-none w-full col-span-full">
+            {topics.map((topic, index) => (
+              <div
+                key={index}
+                className="group flex flex-col items-center p-6 rounded-xl bg-card border border-border hover:border-primary/50 transition-all duration-300"
+              >
+                <div className={`mb-4 ${topic.color}`}>
+                  <topic.icon className="w-10 h-10 group-hover:scale-110 transition-transform duration-300" />
+                </div>
+                <span className="font-medium text-foreground text-sm text-center">
+                  {topic.name}
+                </span>
               </div>
-              <span className="font-medium text-foreground text-sm text-center">
-                {topic.name}
-              </span>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>

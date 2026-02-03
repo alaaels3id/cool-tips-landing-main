@@ -17,6 +17,8 @@ const Footer = () => {
               <a href="/" className="hover:text-primary transition-colors">Home</a>
               <a href="/videos" className="hover:text-primary transition-colors">Videos</a>
               <a href="/about" className="hover:text-primary transition-colors">About</a>
+              <a href="/privacy" className="hover:text-primary transition-colors">Privacy</a>
+              <a href="/terms" className="hover:text-primary transition-colors">Terms</a>
             </nav>
           </div>
 

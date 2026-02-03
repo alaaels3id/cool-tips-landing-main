@@ -18,50 +18,7 @@ const HeroSection = () => {
   return skills.map(skill => {
     console.log(\`Learning \${skill}\`);
     return { skill, mastered: true };
-  });
-}
-
-class CoolTips {
-  constructor() {
-    this.subscribers = 218;
-    this.videos = 64;
-    this.passion = 'programming';
-  }
-
-  teach() {
-    return 'Learn more and more!';
-  }
-}
-
-const tips = new CoolTips();
-tips.teach();
-
-// More content for scrolling
-async function fetchKnowledge() {
-  const response = await fetch('/api/tips');
-  const data = await response.json();
-  return data;
-}
-
-function createTutorial() {
-  const skills = ['PHP', 'Laravel', 'JavaScript'];
-  return skills.map(skill => {
-    console.log(\`Learning \${skill}\`);
-    return { skill, mastered: true };
-  });
-}
-
-class CoolTips {
-  constructor() {
-    this.subscribers = 218;
-    this.videos = 64;
-    this.passion = 'programming';
-  }
-
-  teach() {
-    return 'Learn more and more!';
-  }
-}`}
+`}
         </div>
       </div>
 
