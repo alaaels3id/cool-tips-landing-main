@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Play, Clock, Eye, X } from "lucide-react";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { useTranslation } from "react-i18next";
 
 const videos = [
   {
@@ -41,16 +42,17 @@ const videos = [
 
 const FeaturedVideos = () => {
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
+  const { t } = useTranslation();
 
   return (
     <section className="py-24 relative">
       <div className="container px-4">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            <span className="text-gradient">Featured</span> Tutorials
+            <span className="text-gradient">{t('featured.title')}</span> {t('featured.subtitle')}
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Dive into our most popular programming tutorials and level up your skills
+            {t('featured.description')}
           </p>
         </div>
 
@@ -98,7 +100,7 @@ class Controller {
                 </p>
                 <div className="flex items-center gap-2 text-xs text-muted-foreground">
                   <Eye className="w-3 h-3" />
-                  <span>{video.views} views</span>
+                  <span>{video.views} {t('hero.subscribers').toLowerCase()}</span>
                 </div>
               </CardContent>
             </Card>
@@ -110,7 +112,7 @@ class Controller {
             to="/videos"
             className="inline-flex items-center gap-2 text-primary hover:underline font-medium"
           >
-            View all videos
+            {t('featured.visit_all')}
             <span aria-hidden="true">→</span>
           </Link>
         </div>

@@ -1,4 +1,5 @@
 import { Code, Database, Globe, Terminal, Layers, Cpu } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const topics = [
   { icon: Code, name: "PHP", color: "text-blue-400" },
@@ -8,15 +9,17 @@ const topics = [
 ];
 
 const TopicsSection = () => {
+  const { t } = useTranslation();
+
   return (
     <section className="py-24 bg-secondary/30">
       <div className="container px-4">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Topics We <span className="text-gradient">Cover</span>
+            {t('topics.title')} <span className="text-gradient">{t('topics.subtitle')}</span>
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            From backend fundamentals to advanced frameworks, we've got you covered
+            {t('topics.description')}
           </p>
         </div>
 

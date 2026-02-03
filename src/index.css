@@ -110,6 +110,15 @@
     background-image: var(--gradient-primary);
   }
 
+  /* Synthetic Bold for Handwriting Font */
+  .font-medium,
+  .font-semibold,
+  .font-bold,
+  .font-black {
+    -webkit-text-stroke: 0.5px currentColor;
+    paint-order: stroke fill;
+  }
+
   .bg-gradient-primary {
     background-image: var(--gradient-primary);
   }
