@@ -101,5 +101,25 @@
     "status": "Active",
     "exit": "EXIT_ARCHIVE",
     "back": "Go Back Home!"
+  },
+  "blog": {
+    "badge": "Our Awesome Blog!",
+    "title": "COOL",
+    "subtitle": "STORIES!",
+    "description": "Read our latest tips, tricks, and stories about Laravel, PHP, and modern web development.",
+    "read_more": "Read More",
+    "latest_posts": "Latest Posts",
+    "view_all": "View all posts",
+    "all_posts": "All Posts",
+    "published_at": "Published at",
+    "by": "By",
+    "views": "views",
+    "categories": {
+      "all": "All",
+      "laravel": "Laravel",
+      "php": "PHP",
+      "design": "Design",
+      "devops": "DevOps"
+    }
   }
 }
