@@ -107,6 +107,10 @@
     "title": "COOL",
     "subtitle": "STORIES!",
     "description": "Read our latest tips, tricks, and stories about Laravel, PHP, and modern web development.",
+    "section_badge": "Fresh From The Blog!",
+    "section_title": "LATEST",
+    "section_subtitle": "POSTS!",
+    "section_description": "Check out our newest articles packed with cool tips and awesome tricks!",
     "read_more": "Read More",
     "latest_posts": "Latest Posts",
     "view_all": "View all posts",
@@ -114,12 +118,35 @@
     "published_at": "Published at",
     "by": "By",
     "views": "views",
+    "back_to_blog": "Back to Blog",
+    "related_posts": "Related Posts",
     "categories": {
       "all": "All",
       "laravel": "Laravel",
       "php": "PHP",
       "design": "Design",
       "devops": "DevOps"
+    }
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "GET IN TOUCH",
+    "description": "HAVE A QUESTION OR JUST WANT TO SAY HI? WE'D LOVE TO HEAR FROM YOU!",
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "subject": "Subject",
+      "message": "Message",
+      "name_placeholder": "Your full name",
+      "email_placeholder": "your@email.com",
+      "subject_placeholder": "What's this about?",
+      "message_placeholder": "Tell us more...",
+      "submit": "SEND MESSAGE",
+      "sending": "SENDING...",
+      "success": "Message Sent!",
+      "success_desc": "Thanks for reaching out. We'll get back to you soon!",
+      "error": "Something went wrong",
+      "error_desc": "Please try again later."
     }
   }
 }

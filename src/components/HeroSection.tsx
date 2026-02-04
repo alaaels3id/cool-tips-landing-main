@@ -19,9 +19,50 @@ const HeroSection = () => {
           {`function createTutorial() {
   const skills = ['PHP', 'Laravel', 'JavaScript'];
   return skills.map(skill => {
-    console.log(\`Learning \${skill}\`);
     return { skill, mastered: true };
   });
+}
+
+class CoolTips {
+  constructor() {
+    this.subscribers = 218;
+    this.videos = 64;
+    this.passion = 'programming';
+    this.message = 'font-mono text-xs text-foreground/80 dark:text-foreground/60 animate-code-scroll whitespace-pre leading-relaxed';
+  }
+
+  teach() {
+    return 'Learn more and more!';
+  }
+}
+
+const tips = new CoolTips();
+tips.teach();
+
+// More content for scrolling
+async function fetchKnowledge() {
+  const response = await fetch('/api/tips');
+  const data = await response.json();
+  return data;
+}
+
+function createTutorial() {
+  const skills = ['PHP', 'Laravel', 'JavaScript'];
+  return skills.map(skill => {
+    return { skill, mastered: true };
+  });
+}
+
+class CoolTips {
+  constructor() {
+    this.subscribers = 218;
+    this.videos = 64;
+    this.passion = 'programming';
+  }
+
+  teach() {
+    return 'Learn more and more!';
+  }
 }`}
         </div >
       </div >

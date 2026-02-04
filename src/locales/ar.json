@@ -107,6 +107,10 @@
     "title": "قصص",
     "subtitle": "كول!",
     "description": "اقرأ أحدث النصائح والحيل والقصص حول Laravel و PHP وتطوير الويب الحديث.",
+    "section_badge": "طازج من المدونة!",
+    "section_title": "أحدث",
+    "section_subtitle": "المقالات!",
+    "section_description": "ألق نظرة على أحدث مقالاتنا المليئة بالنصائح المفيدة والحيل الرائعة!",
     "read_more": "اقرأ المزيد",
     "latest_posts": "أحدث المقالات",
     "view_all": "شاهد كل المقالات",
@@ -114,12 +118,35 @@
     "published_at": "نُشر في",
     "by": "بواسطة",
     "views": "مشاهدة",
+    "back_to_blog": "العودة للمدونة",
+    "related_posts": "مقالات ذات صلة",
     "categories": {
       "all": "الكل",
       "laravel": "لارافيل",
       "php": "بي اتش بي",
       "design": "تصميم",
       "devops": "ديف أوبس"
+    }
+  },
+  "contact": {
+    "title": "اتصل بنا",
+    "subtitle": "تواصل معنا",
+    "description": "هل لديك سؤال أو تريد فقط إلقاء التحية؟ نود أن نسمع منك!",
+    "form": {
+      "name": "الاسم",
+      "email": "البريد الإلكتروني",
+      "subject": "الموضوع",
+      "message": "الرسالة",
+      "name_placeholder": "اسمك الكامل",
+      "email_placeholder": "اسمك@بريدك.com",
+      "subject_placeholder": "عن ماذا يدور موضوعك؟",
+      "message_placeholder": "أخبرنا المزيد...",
+      "submit": "إرسال الرسالة",
+      "sending": "جاري الإرسال...",
+      "success": "تم إرسال الرسالة!",
+      "success_desc": "شكراً لتواصلك معنا. سنقوم بالرد عليك قريباً!",
+      "error": "حدث خطأ ما",
+      "error_desc": "يرجى المحاولة مرة أخرى لاحقاً."
     }
   }
 }

@@ -14,7 +14,7 @@ const PostCard = ({ post }: PostCardProps) => {
 
     return (
         <div className="group flex flex-col bg-card border border-border overflow-hidden hover:border-primary/50 transition-all duration-300">
-            <Link to={`/blog/${post.id}`} className="block relative aspect-video overflow-hidden">
+            <Link to={`/blog/${post.slug}`} className="block relative aspect-video overflow-hidden">
                 <img
                     src={post.image}
                     alt={post.title}
@@ -39,7 +39,7 @@ const PostCard = ({ post }: PostCardProps) => {
                     </div>
                 </div>
 
-                <Link to={`/blog/${post.id}`}>
+                <Link to={`/blog/${post.slug}`}>
                     <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors line-clamp-2 uppercase">
                         {post.title}
                     </h3>
@@ -58,7 +58,7 @@ const PostCard = ({ post }: PostCardProps) => {
                     </div>
 
                     <Link
-                        to={`/blog/${post.id}`}
+                        to={`/blog/${post.slug}`}
                         className="text-xs font-bold uppercase tracking-widest text-primary hover:underline"
                     >
                         {t("blog.read_more")} {isRtl ? "←" : "→"}

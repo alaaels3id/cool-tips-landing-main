@@ -1,6 +1,7 @@
 import HeroSection from "@/components/HeroSection";
 import FeaturedVideos from "@/components/FeaturedVideos";
 import TopicsSection from "@/components/TopicsSection";
+import LatestPosts from "@/components/LatestPosts";
 import SocialLinks from "@/components/SocialLinks";
 import Footer from "@/components/Footer";
 
@@ -10,6 +11,7 @@ const Index = () => {
       <HeroSection />
       <FeaturedVideos />
       <TopicsSection />
+      <LatestPosts />
       <SocialLinks />
       <Footer />
     </main>
