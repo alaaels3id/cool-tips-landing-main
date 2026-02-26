@@ -54,7 +54,7 @@ export default {
         sm: "calc(var(--radius) - 4px)",
       },
       fontFamily: {
-        sans: ['"Playwrite New Zealand Basic"', 'Space Grotesk', 'sans-serif'],
+        sans: ['"Rubik Bubbles"', "system-ui", "-apple-system", "sans-serif"],
         mono: ['JetBrains Mono', 'monospace'],
       },
       keyframes: {

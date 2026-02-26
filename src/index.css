@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Playwrite+New+Zealand+Basic:wght@100..400&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Rubik+Bubbles&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -85,7 +85,7 @@
 
   body {
     @apply bg-background text-foreground font-sans antialiased;
-    font-family: 'Playwrite New Zealand Basic', cursive;
+    font-family: 'Rubik Bubbles', system-ui, -apple-system, sans-serif;
   }
 
   h1,
@@ -94,7 +94,8 @@
   h4,
   h5,
   h6 {
-    font-family: 'Playwrite New Zealand Basic', cursive;
+    @apply font-sans;
+    font-family: 'Rubik Bubbles', system-ui, -apple-system, sans-serif;
   }
 
   code,
@@ -108,15 +109,6 @@
   .text-gradient {
     @apply bg-clip-text text-transparent;
     background-image: var(--gradient-primary);
-  }
-
-  /* Synthetic Bold for Handwriting Font */
-  .font-medium,
-  .font-semibold,
-  .font-bold,
-  .font-black {
-    -webkit-text-stroke: 0.5px currentColor;
-    paint-order: stroke fill;
   }
 
   .bg-gradient-primary {
