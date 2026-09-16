@@ -1,7 +1,10 @@
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import logo from "@/assets/favicon.png";
-import { Youtube, Twitter, Facebook, ExternalLink } from "lucide-react";
+import { ExternalLink } from "lucide-react";
+import { YouTubeIcon } from "@/components/common/YouTubeIcon";
+import { XIcon } from "@/components/common/XIcon";
+import { FacebookIcon } from "@/components/common/FacebookIcon";
 
 const Footer = () => {
   const { t } = useTranslation();
@@ -63,18 +66,18 @@ const Footer = () => {
                 rel="noopener noreferrer"
                 className="flex items-center gap-3 hover:text-primary transition-colors group"
               >
-                <Youtube className="w-5 h-5" />
+                <YouTubeIcon className="w-5 h-5" variant="red" />
                 <span>YouTube</span>
                 <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
               </a>
               <a
-                href="https://twitter.com/coool_tips"
+                href="https://x.com/coool_tips"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-3 hover:text-primary transition-colors group"
               >
-                <Twitter className="w-5 h-5" />
-                <span>Twitter</span>
+                <XIcon className="w-4 h-4" />
+                <span>X</span>
                 <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
               </a>
               <a
@@ -83,7 +86,7 @@ const Footer = () => {
                 rel="noopener noreferrer"
                 className="flex items-center gap-3 hover:text-primary transition-colors group"
               >
-                <Facebook className="w-5 h-5" />
+                <FacebookIcon className="w-4 h-4 text-[#1877F2]" />
                 <span>Facebook</span>
                 <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
               </a>

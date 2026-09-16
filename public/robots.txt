@@ -1,14 +1,5 @@
-User-agent: Googlebot
-Allow: /
-
-User-agent: Bingbot
-Allow: /
-
-User-agent: Twitterbot
-Allow: /
-
-User-agent: facebookexternalhit
-Allow: /
-
+# Cool Tips robots.txt
 User-agent: *
 Allow: /
+
+Sitemap: https://coooltips.com/sitemap.xml

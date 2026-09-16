@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Rubik+Bubbles&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -24,8 +24,8 @@
     --muted: 240 4.8% 95.9%;
     --muted-foreground: 240 3.8% 46.1%;
 
-    --accent: 262 83% 58%;
-    --accent-foreground: 0 0% 98%;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
@@ -63,8 +63,8 @@
     --muted: 240 10% 15%;
     --muted-foreground: 240 5% 65%;
 
-    --accent: 262 83% 58%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 240 10% 15%;
+    --accent-foreground: 0 0% 98%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
@@ -85,7 +85,6 @@
 
   body {
     @apply bg-background text-foreground font-sans antialiased;
-    font-family: 'Rubik Bubbles', system-ui, -apple-system, sans-serif;
   }
 
   h1,
@@ -94,8 +93,7 @@
   h4,
   h5,
   h6 {
-    @apply font-sans;
-    font-family: 'Rubik Bubbles', system-ui, -apple-system, sans-serif;
+    @apply font-sans tracking-tight;
   }
 
   code,

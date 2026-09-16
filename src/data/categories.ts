@@ -1,0 +1,68 @@
+import { Category } from "@/types";
+
+export const categories: Category[] = [
+  {
+    id: "laravel",
+    name: "Laravel",
+    slug: "laravel",
+    description: "Modern Laravel tips, model hacks, routing techniques, queues, and performance optimizations.",
+    color: "from-red-500/20 to-orange-500/20 text-red-400 border-red-500/30",
+    iconName: "Layers",
+  },
+  {
+    id: "php",
+    name: "PHP",
+    slug: "php",
+    description: "Core PHP best practices, modern PHP 8.x features, OOP patterns, and clean code techniques.",
+    color: "from-blue-500/20 to-indigo-500/20 text-blue-400 border-blue-500/30",
+    iconName: "Code",
+  },
+  {
+    id: "mysql",
+    name: "MySQL",
+    slug: "mysql",
+    description: "Database indexing, query optimization, migration best practices, and schema design.",
+    color: "from-amber-500/20 to-yellow-500/20 text-amber-400 border-amber-500/30",
+    iconName: "Database",
+  },
+  {
+    id: "backend",
+    name: "Backend Development",
+    slug: "backend",
+    description: "Architectural patterns, scalable system design, caching layers, and background processing.",
+    color: "from-emerald-500/20 to-teal-500/20 text-emerald-400 border-emerald-500/30",
+    iconName: "Server",
+  },
+  {
+    id: "apis",
+    name: "APIs & Webhooks",
+    slug: "apis",
+    description: "RESTful and RPC API construction, rate limiting, authentication, and webhook reliability.",
+    color: "from-purple-500/20 to-pink-500/20 text-purple-400 border-purple-500/30",
+    iconName: "Cpu",
+  },
+  {
+    id: "tools",
+    name: "Developer Tools",
+    slug: "tools",
+    description: "CLI utilities, custom stubs, Vite tooling, testing setups, and developer workflow shortcuts.",
+    color: "from-cyan-500/20 to-blue-500/20 text-cyan-400 border-cyan-500/30",
+    iconName: "Terminal",
+  },
+  {
+    id: "web-development",
+    name: "Web Development",
+    slug: "web-development",
+    description: "Full-stack integration, modern frontend asset bundling, and responsive UI engineering.",
+    color: "from-green-500/20 to-emerald-500/20 text-green-400 border-green-500/30",
+    iconName: "Globe",
+  },
+  {
+    id: "tips",
+    name: "Programming Tips",
+    slug: "tips",
+    description: "Quick 5-minute techniques, debugging hacks, and developer productivity shortcuts.",
+    color: "from-violet-500/20 to-fuchsia-500/20 text-violet-400 border-violet-500/30",
+    iconName: "Zap",
+  },
+];

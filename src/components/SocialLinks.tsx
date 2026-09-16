@@ -1,11 +1,14 @@
 import { Button } from "@/components/ui/button";
-import { Youtube, Twitter, Linkedin, Facebook } from "lucide-react";
+import { Linkedin } from "lucide-react";
+import { YouTubeIcon } from "@/components/common/YouTubeIcon";
+import { XIcon } from "@/components/common/XIcon";
+import { FacebookIcon } from "@/components/common/FacebookIcon";
 
 const socials = [
-  { icon: Youtube, name: "YouTube", url: "https://www.youtube.com/@coooltips", color: "hover:bg-red-600" },
-  { icon: Twitter, name: "Twitter", url: "https://twitter.com/coool_tips", color: "hover:bg-sky-500" },
+  { icon: YouTubeIcon, name: "YouTube", url: "https://www.youtube.com/@coooltips", color: "hover:bg-red-600" },
+  { icon: FacebookIcon, name: "Facebook", url: "https://www.facebook.com/coooltips", color: "hover:bg-[#1877F2]" },
+  { icon: XIcon, name: "X", url: "https://x.com/coool_tips", color: "hover:bg-neutral-800" },
   { icon: Linkedin, name: "LinkedIn", url: "https://www.linkedin.com/in/alaa-elsa", color: "hover:bg-blue-600" },
-  { icon: Facebook, name: "Facebook", url: "https://www.facebook.com/coooltips", color: "hover:bg-blue-700" },
 ];
 
 const SocialLinks = () => {

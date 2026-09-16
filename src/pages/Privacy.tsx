@@ -1,98 +1,86 @@
-import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import Footer from "@/components/Footer";
-import SocialLinks from "@/components/SocialLinks";
-import logo from "@/assets/logo.png";
-import { ArrowLeft } from "lucide-react";
-import Header from "@/components/Header";
+import AppLayout from "@/components/layout/AppLayout";
+import SEO from "@/components/seo/SEO";
+import { Link } from "react-router-dom";
+import { Shield, ArrowLeft } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
-const Privacy = () => {
+export const Privacy = () => {
   const { t } = useTranslation();
 
   return (
-    <div className="min-h-screen bg-background text-foreground selection:bg-primary selection:text-primary-foreground">
-      <Header />
+    <AppLayout>
+      <SEO
+        title={t("privacy.title")}
+        description={t("privacy.s1_text")}
+      />
 
-      <main className="container px-4 py-32 relative">
-        {/* Playful Floating Blobs */}
-        <div className="absolute top-0 right-0 w-80 h-80 bg-primary/10 rounded-full blur-[100px] animate-bounce-slow" />
-        <div className="absolute bottom-1/4 left-0 w-64 h-64 bg-accent/10 rounded-full blur-[80px] animate-bounce-slow" style={{ animationDelay: '1s' }} />
-
-        <div className="max-w-4xl mx-auto">
-          <div className="flex flex-col items-center text-center mb-24 animate-reveal">
-            <div className="inline-block px-4 py-1 rounded-full bg-accent text-accent-foreground font-bold text-xs uppercase tracking-widest mb-10 rotate-[-2deg]">
-              {t('privacy.badge')}
-            </div>
-            <h1 className="text-6xl md:text-9xl font-bold mb-10 leading-[0.8] tracking-tighter">
-              {t('privacy.title')} <span className="text-primary italic">{t('privacy.subtitle')}</span>
-            </h1>
-            <p className="text-2xl font-bold text-foreground/60 max-w-2xl leading-tight uppercase">
-              {t('privacy.intro')}
-            </p>
-          </div>
-
-          <div className="space-y-20 animate-reveal" style={{ animationDelay: '0.2s' }}>
-            <section className="bubble-card p-10 bg-white/50 dark:bg-black/20">
-              <h2 className="text-3xl font-bold mb-6 italic text-primary">{t('privacy.section1_title')}</h2>
-              <p className="text-xl font-bold leading-relaxed text-foreground/80 uppercase">
-                {t('privacy.section1_text')}
-              </p>
-            </section>
-
-            <section className="bubble-card p-10 bg-white/50 dark:bg-black/20">
-              <h2 className="text-3xl font-bold mb-6 italic text-primary">{t('privacy.section2_title')}</h2>
-              <p className="text-xl font-bold leading-relaxed text-foreground/80 uppercase">
-                {t('privacy.section2_text')}
-              </p>
-            </section>
-
-            <section className="bubble-card p-10 bg-white/50 dark:bg-black/20">
-              <h2 className="text-3xl font-bold mb-6 italic text-accent">{t('privacy.section3_title')}</h2>
-              <p className="text-xl font-bold leading-relaxed text-foreground/80 uppercase">
-                {t('privacy.section3_text')}
-              </p>
-            </section>
-
-            <section className="bubble-card p-10 bg-white/50 dark:bg-black/20">
-              <h2 className="text-3xl font-bold mb-6 italic text-primary">{t('privacy.section4_title')}</h2>
-              <p className="text-xl font-bold leading-relaxed text-foreground/80 uppercase">
-                {t('privacy.section4_text')}
-              </p>
-            </section>
-
-            <section className="bubble-card p-10 bg-white/50 dark:bg-black/20">
-              <h2 className="text-3xl font-bold mb-6 italic text-primary">{t('privacy.section5_title')}</h2>
-              <p className="text-xl font-bold leading-relaxed text-foreground/80 uppercase">
-                {t('privacy.section5_text')}
-              </p>
-            </section>
-
-            <section className="bubble-card p-10 bg-white/50 dark:bg-black/20">
-              <h2 className="text-3xl font-bold mb-6 italic text-accent">{t('privacy.section6_title')}</h2>
-              <p className="text-xl font-bold leading-relaxed text-foreground/80 uppercase">
-                {t('privacy.section6_text')}
-              </p>
-            </section>
-
-            <section className="bubble-card p-10 bg-white/50 dark:bg-black/20">
-              <h2 className="text-3xl font-bold mb-6 italic text-primary">{t('privacy.section7_title')}</h2>
-              <p className="text-xl font-bold leading-relaxed text-foreground/80 uppercase">
-                {t('privacy.section7_text')}
-              </p>
-            </section>
-
-            <div className="text-center pt-10">
-              <span className="text-xs font-black uppercase tracking-widest text-muted-foreground bg-foreground/5 px-4 py-2 rounded-full">
-                {t('privacy.last_updated')}
-              </span>
-            </div>
-          </div>
+      <div className="container mx-auto px-4 py-12 md:py-16 max-w-4xl">
+        <div className="mb-6">
+          <Button asChild variant="ghost" size="sm" className="gap-1.5 text-xs text-muted-foreground">
+            <Link to="/">
+              <ArrowLeft className="w-3.5 h-3.5 rtl:rotate-180" /> {t("privacy.back")}
+            </Link>
+          </Button>
         </div>
-      </main>
 
-      <SocialLinks />
-      <Footer />
-    </div>
+        <div className="space-y-4 mb-12">
+          <div className="inline-flex items-center gap-2 text-xs font-mono font-bold text-primary uppercase tracking-widest">
+            <Shield className="w-3.5 h-3.5" />
+            <span>{t("privacy.badge")}</span>
+          </div>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight">
+            {t("privacy.title")}
+          </h1>
+          <p className="text-xs font-mono text-muted-foreground">
+            {t("privacy.last_updated")} {new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}
+          </p>
+        </div>
+
+        <div className="prose prose-neutral dark:prose-invert max-w-none space-y-8 text-muted-foreground text-sm sm:text-base leading-relaxed">
+          <section className="p-6 rounded-2xl bg-card border border-border/70 space-y-3">
+            <h2 className="text-xl font-bold text-foreground">{t("privacy.s1_title")}</h2>
+            <p>{t("privacy.s1_text")}</p>
+          </section>
+
+          <section className="p-6 rounded-2xl bg-card border border-border/70 space-y-3">
+            <h2 className="text-xl font-bold text-foreground">{t("privacy.s2_title")}</h2>
+            <p>{t("privacy.s2_intro")}</p>
+            <ul className="list-disc pl-5 rtl:pl-0 rtl:pr-5 space-y-1">
+              <li>{t("privacy.s2_p1")}</li>
+              <li>{t("privacy.s2_p2")}</li>
+              <li>{t("privacy.s2_p3")}</li>
+            </ul>
+          </section>
+
+          <section className="p-6 rounded-2xl bg-card border border-border/70 space-y-3">
+            <h2 className="text-xl font-bold text-foreground">{t("privacy.s3_title")}</h2>
+            <p>{t("privacy.s3_text1")}</p>
+            <p>{t("privacy.s3_text2")}</p>
+          </section>
+
+          <section className="p-6 rounded-2xl bg-card border border-border/70 space-y-3">
+            <h2 className="text-xl font-bold text-foreground">{t("privacy.s4_title")}</h2>
+            <p>{t("privacy.s4_text")}</p>
+          </section>
+
+          <section className="p-6 rounded-2xl bg-card border border-border/70 space-y-3">
+            <h2 className="text-xl font-bold text-foreground">{t("privacy.s5_title")}</h2>
+            <p>{t("privacy.s5_text")}</p>
+          </section>
+
+          <section className="p-6 rounded-2xl bg-card border border-border/70 space-y-3">
+            <h2 className="text-xl font-bold text-foreground">{t("privacy.s6_title")}</h2>
+            <p>
+              {t("privacy.s6_text")}{" "}
+              <Link to="/contact" className="text-primary hover:underline">
+                {t("nav.contact")}
+              </Link>.
+            </p>
+          </section>
+        </div>
+      </div>
+    </AppLayout>
   );
 };
 
