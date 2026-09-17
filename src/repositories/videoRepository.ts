@@ -1,9 +1,10 @@
 import { Video } from "@/types";
-import { allVideos } from "@/data/videos";
+import { apiClient } from "@/lib/apiClient";
 
 export interface VideoSearchParams {
   query?: string;
   category?: string;
+  playlist?: string;
   tag?: string;
   sortBy?: "newest" | "oldest" | "views";
 }
@@ -18,94 +19,55 @@ export interface IVideoRepository {
   search(params: VideoSearchParams): Promise<Video[]>;
 }
 
-export class StaticVideoRepository implements IVideoRepository {
+export class ApiVideoRepository implements IVideoRepository {
   async getAll(): Promise<Video[]> {
-    return [...allVideos];
+    const res = await apiClient.getVideos({ per_page: 50 });
+    return res.data;
   }
 
   async getBySlug(slug: string): Promise<Video | null> {
-    const found = allVideos.find((v) => v.slug === slug || v.id === slug || v.youtubeVideoId === slug);
-    return found || null;
+    const res = await apiClient.getVideo(slug);
+    return res?.video || null;
   }
 
   async getById(id: string): Promise<Video | null> {
-    const found = allVideos.find((v) => v.id === id || v.youtubeVideoId === id || v.slug === id);
-    return found || null;
+    const res = await apiClient.getVideo(id);
+    return res?.video || null;
   }
 
   async getFeatured(): Promise<Video[]> {
-    return allVideos.filter((v) => v.featured);
+    const res = await apiClient.getVideos({ per_page: 10 });
+    return res.data.filter((v) => v.featured);
   }
 
   async getLatest(limit = 6): Promise<Video[]> {
-    return allVideos.slice(0, limit);
+    const res = await apiClient.getVideos({ per_page: limit, sort: "newest" });
+    return res.data.slice(0, limit);
   }
 
   async getRelated(video: Video, limit = 4): Promise<Video[]> {
-    return allVideos
+    const res = await apiClient.getVideo(video.slug || video.id);
+    if (res?.related_videos && res.related_videos.length > 0) {
+      return res.related_videos.slice(0, limit);
+    }
+    const all = await this.getAll();
+    return all
       .filter((v) => v.id !== video.id)
-      .filter(
-        (v) =>
-          v.category === video.category ||
-          v.tags.some((t) => video.tags.includes(t))
-      )
+      .filter((v) => (video.playlist && v.playlist === video.playlist) || v.category === video.category || v.tags.some((t) => video.tags.includes(t)))
       .slice(0, limit);
   }
 
   async search(params: VideoSearchParams): Promise<Video[]> {
-    let result = [...allVideos];
-
-    if (params.category && params.category !== "all") {
-      const catLower = params.category.toLowerCase();
-      result = result.filter(
-        (v) =>
-          v.category.toLowerCase() === catLower ||
-          v.tags.some((t) => t.toLowerCase() === catLower)
-      );
-    }
-
-    if (params.tag) {
-      const tagLower = params.tag.toLowerCase();
-      result = result.filter((v) =>
-        v.tags.some((t) => t.toLowerCase() === tagLower)
-      );
-    }
-
-    if (params.query && params.query.trim()) {
-      const q = params.query.toLowerCase().trim();
-      result = result.filter(
-        (v) =>
-          v.title.toLowerCase().includes(q) ||
-          v.description.toLowerCase().includes(q) ||
-          v.category.toLowerCase().includes(q) ||
-          v.tags.some((t) => t.toLowerCase().includes(q))
-      );
-    }
-
-    if (params.sortBy === "oldest") {
-      result.sort(
-        (a, b) =>
-          new Date(a.publishedAt).getTime() - new Date(b.publishedAt).getTime()
-      );
-    } else if (params.sortBy === "views") {
-      result.sort((a, b) => {
-        const parseViews = (str?: string) => {
-          if (!str) return 0;
-          if (str.includes("K")) return parseFloat(str) * 1000;
-          return parseFloat(str) || 0;
-        };
-        return parseViews(b.views) - parseViews(a.views);
-      });
-    } else {
-      // Default: newest
-      result.sort(
-        (a, b) =>
-          new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
-      );
-    }
-
-    return result;
+    const res = await apiClient.getVideos({
+      query: params.query,
+      category: params.category,
+      playlist: params.playlist,
+      tag: params.tag,
+      sort: params.sortBy,
+      per_page: 100,
+    });
+    return res.data;
   }
 }
 
-export const videoRepository = new StaticVideoRepository();
+export const videoRepository = new ApiVideoRepository();

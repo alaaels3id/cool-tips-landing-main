@@ -5,8 +5,8 @@ import AppLayout from "@/components/layout/AppLayout";
 import SEO from "@/components/seo/SEO";
 import VideoPlayer from "@/components/video/VideoPlayer";
 import VideoCard from "@/components/video/VideoCard";
+import NoContentCard from "@/components/common/NoContentCard";
 import { videoRepository } from "@/repositories/videoRepository";
-import { allVideos } from "@/data/videos";
 import { Video } from "@/types";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -25,32 +25,53 @@ import {
   FileText,
   ExternalLink,
   BookOpen,
+  ListVideo,
 } from "lucide-react";
 
 export const VideoDetails = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { slug } = useParams<{ slug: string }>();
 
   const [video, setVideo] = useState<Video | null>(null);
   const [relatedVideos, setRelatedVideos] = useState<Video[]>([]);
+  const [allVideosList, setAllVideosList] = useState<Video[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (!slug) return;
+    let isMounted = true;
     setLoading(true);
 
-    videoRepository.getBySlug(slug).then((found) => {
-      if (found) {
-        setVideo(found);
-        videoRepository.getRelated(found, 4).then((related) => {
-          setRelatedVideos(related);
-        });
+    Promise.all([
+      videoRepository.getBySlug(slug),
+      videoRepository.getAll(),
+    ])
+      .then(([found, catalog]) => {
+        if (!isMounted) return;
+        if (found) {
+          setVideo(found);
+          setAllVideosList(catalog);
+          videoRepository.getRelated(found, 4).then((related) => {
+            if (isMounted) setRelatedVideos(related);
+          });
+        } else {
+          setVideo(null);
+          setRelatedVideos([]);
+        }
         setLoading(false);
-      } else {
-        setLoading(false);
-      }
-    });
-  }, [slug]);
+      })
+      .catch(() => {
+        if (isMounted) {
+          setVideo(null);
+          setRelatedVideos([]);
+          setLoading(false);
+        }
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, [slug, i18n.language]);
 
   const handleCopyLink = () => {
     navigator.clipboard.writeText(window.location.href);
@@ -76,11 +97,11 @@ export const VideoDetails = () => {
   };
 
   // Find next and previous video
-  const currentIndex = video ? allVideos.findIndex((v) => v.id === video.id) : -1;
-  const prevVideo = currentIndex > 0 ? allVideos[currentIndex - 1] : null;
+  const currentIndex = video ? allVideosList.findIndex((v) => v.id === video.id || v.slug === video.slug) : -1;
+  const prevVideo = currentIndex > 0 ? allVideosList[currentIndex - 1] : null;
   const nextVideo =
-    currentIndex >= 0 && currentIndex < allVideos.length - 1
-      ? allVideos[currentIndex + 1]
+    currentIndex >= 0 && currentIndex < allVideosList.length - 1
+      ? allVideosList[currentIndex + 1]
       : null;
 
   if (loading) {
@@ -98,14 +119,13 @@ export const VideoDetails = () => {
     return (
       <AppLayout>
         <SEO title={t("video_details.not_found_title")} />
-        <div className="container mx-auto px-4 py-24 text-center max-w-xl">
-          <h1 className="text-3xl font-bold mb-4">{t("video_details.not_found_title")}</h1>
-          <p className="text-muted-foreground mb-8">
-            {t("video_details.not_found_desc")}
-          </p>
-          <Button asChild>
-            <Link to="/videos">{t("home.explore_all_videos")}</Link>
-          </Button>
+        <div className="container mx-auto px-4 py-20">
+          <NoContentCard
+            title={t("video_details.not_found_title")}
+            description={t("video_details.not_found_desc")}
+            actionLabel={t("home.explore_all_videos")}
+            actionLink="/videos"
+          />
         </div>
       </AppLayout>
     );
@@ -149,6 +169,17 @@ export const VideoDetails = () => {
                 <Badge variant="default" className="font-semibold text-xs">
                   {video.category}
                 </Badge>
+                {video.playlist && (
+                  <Link to={`/videos?playlist=${encodeURIComponent(video.playlist)}`}>
+                    <Badge
+                      variant="secondary"
+                      className="font-semibold text-xs gap-1.5 hover:bg-secondary/80 cursor-pointer border border-primary/20 text-primary"
+                    >
+                      <ListVideo className="w-3 h-3" />
+                      <span>{video.playlist}</span>
+                    </Badge>
+                  </Link>
+                )}
                 <div className="flex items-center gap-3 text-xs font-mono text-muted-foreground">
                   <span className="flex items-center gap-1">
                     <Calendar className="w-3.5 h-3.5" />

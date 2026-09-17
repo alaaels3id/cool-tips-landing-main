@@ -1,3 +1,4 @@
+import { apiClient } from "@/lib/apiClient";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -54,16 +55,20 @@ export const Contact = () => {
     },
   });
 
-  const onSubmit = async () => {
+  const onSubmit = async (values: FormValues) => {
     setIsSubmitting(true);
-    await new Promise((resolve) => setTimeout(resolve, 800));
-    setIsSubmitting(false);
-    setSubmitted(true);
-
-    toast.success(t("contact.form.success_title"), {
-      description: t("contact.form.success_desc"),
-    });
-    form.reset();
+    try {
+      await apiClient.sendContact(values);
+      setSubmitted(true);
+      toast.success(t("contact.form.success_title"), {
+        description: t("contact.form.success_desc"),
+      });
+      form.reset();
+    } catch (err: any) {
+      toast.error(err.message || "Failed to send message");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (

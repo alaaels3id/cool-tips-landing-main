@@ -263,6 +263,24 @@
     "back_home": "Back to Home",
     "explore_videos": "Explore All Videos"
   },
+  "common": {
+    "no_content_title": "No Content Found",
+    "no_content_desc": "There is currently no data or items to display here.",
+    "no_videos_title": "No Videos Available",
+    "no_videos_desc": "No tutorials match your selected filters or search query.",
+    "no_playlists_title": "No Playlists Found",
+    "no_playlists_desc": "There are currently no playlists available to display.",
+    "no_resources_title": "No Resources Found",
+    "no_resources_desc": "No developer resources match your criteria.",
+    "no_posts_title": "No Articles Found",
+    "no_posts_desc": "There are no blog posts published in this section yet.",
+    "no_categories_title": "No Topics Found",
+    "no_categories_desc": "No topics or categories are currently listed.",
+    "reset_filters": "Reset Filters",
+    "back_to_home": "Back to Home",
+    "browse_videos": "Browse All Videos",
+    "retry": "Try Again"
+  },
   "footer": {
     "description": "Practical programming tips, modern Laravel architectures, PHP techniques, and backend development shortcuts for developers who care about clean code.",
     "tutorials_badge": "Free developer tutorials",

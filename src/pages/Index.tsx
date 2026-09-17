@@ -1,56 +1,64 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import AppLayout from "@/components/layout/AppLayout";
 import SEO from "@/components/seo/SEO";
 import VideoCard from "@/components/video/VideoCard";
 import VideoPlayer from "@/components/video/VideoPlayer";
+import NoContentCard from "@/components/common/NoContentCard";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { categories } from "@/data/categories";
-import { allVideos, latestVideos, featuredVideos } from "@/data/videos";
+import { apiClient, HomePayload } from "@/lib/apiClient";
+import { Video, Category } from "@/types";
 import {
   Play,
-  Youtube,
   ArrowRight,
   Sparkles,
-  Layers,
-  Code,
-  Database,
-  Server,
-  Cpu,
-  Terminal,
-  Globe,
-  Zap,
   CheckCircle2,
+  Video as VideoIcon,
 } from "lucide-react";
 import logo from "@/assets/logo.png";
+import { getLucideIcon } from "@/lib/lucideIcons";
 import { YouTubeIcon } from "@/components/common/YouTubeIcon";
 
-const getCategoryIcon = (slug: string) => {
-  switch (slug) {
-    case "laravel":
-      return <Layers className="w-5 h-5 text-red-500" />;
-    case "php":
-      return <Code className="w-5 h-5 text-blue-500" />;
-    case "mysql":
-      return <Database className="w-5 h-5 text-amber-500" />;
-    case "backend":
-      return <Server className="w-5 h-5 text-emerald-500" />;
-    case "apis":
-      return <Cpu className="w-5 h-5 text-purple-500" />;
-    case "tools":
-      return <Terminal className="w-5 h-5 text-cyan-500" />;
-    case "web-development":
-      return <Globe className="w-5 h-5 text-green-500" />;
-    case "tips":
-    default:
-      return <Zap className="w-5 h-5 text-violet-500" />;
-  }
+/** Render the Lucide icon stored in category.iconName from the API */
+const getCategoryIcon = (iconName?: string | null) => {
+  const Icon = getLucideIcon(iconName);
+  return <Icon className="w-5 h-5" />;
 };
 
 const Index = () => {
-  const { t } = useTranslation();
-  const topFeatured = featuredVideos[0] || allVideos[0];
+  const { t, i18n } = useTranslation();
+  const [homeData, setHomeData] = useState<HomePayload | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    let isMounted = true;
+    setLoading(true);
+
+    apiClient
+      .getHome()
+      .then((data) => {
+        if (isMounted) {
+          setHomeData(data);
+          setLoading(false);
+        }
+      })
+      .catch(() => {
+        if (isMounted) {
+          setLoading(false);
+        }
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, [i18n.language]);
+
+  const heroVideo = homeData?.hero_video;
+  const latestVideos: Video[] = homeData?.latest_videos || [];
+  const categories: Category[] = homeData?.categories || [];
+  const stats = homeData?.stats || {};
 
   return (
     <AppLayout>
@@ -104,7 +112,7 @@ const Index = () => {
               size="lg"
               className="h-12 px-8 text-base font-semibold rounded-xl gap-2 border-border/80"
             >
-              <a href="https://www.youtube.com/@coooltips" target="_blank" rel="noopener noreferrer">
+              <a href={homeData?.brand?.youtube_url || "https://www.youtube.com/@coooltips"} target="_blank" rel="noopener noreferrer">
                 <YouTubeIcon className="w-5 h-5" variant="red" />
                 {t("home.visit_youtube")}
               </a>
@@ -114,27 +122,33 @@ const Index = () => {
           {/* Stats bar */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 p-6 rounded-2xl bg-card/60 border border-border/70 backdrop-blur-md max-w-3xl mx-auto text-center font-mono">
             <div>
-              <div className="text-2xl md:text-3xl font-extrabold text-foreground">64+</div>
-              <div className="text-xs text-muted-foreground uppercase tracking-wider mt-1">{t("home.stats.tutorials")}</div>
+              <div className="text-2xl md:text-3xl font-extrabold text-foreground">{stats.videos || "64+"}</div>
+              <div className="text-sm font-semibold text-foreground/75 mt-1.5">{t("home.stats.tutorials")}</div>
             </div>
             <div>
-              <div className="text-2xl md:text-3xl font-extrabold text-primary">100%</div>
-              <div className="text-xs text-muted-foreground uppercase tracking-wider mt-1">{t("home.stats.practical_code")}</div>
+              <div className="text-2xl md:text-3xl font-extrabold text-primary">{stats.subscribers || "100%"}</div>
+              <div className="text-sm font-semibold text-foreground/75 mt-1.5">{t("home.stats.practical_code")}</div>
             </div>
             <div>
-              <div className="text-2xl md:text-3xl font-extrabold text-foreground">8+</div>
-              <div className="text-xs text-muted-foreground uppercase tracking-wider mt-1">{t("home.stats.topic_tracks")}</div>
+              <div className="text-2xl md:text-3xl font-extrabold text-foreground">{stats.resources || "8+"}</div>
+              <div className="text-sm font-semibold text-foreground/75 mt-1.5">{t("home.stats.topic_tracks")}</div>
             </div>
             <div>
-              <div className="text-2xl md:text-3xl font-extrabold text-foreground">Free</div>
-              <div className="text-xs text-muted-foreground uppercase tracking-wider mt-1">{t("home.stats.always_free")}</div>
+              <div className="text-2xl md:text-3xl font-extrabold text-foreground">{stats.views || "Free"}</div>
+              <div className="text-sm font-semibold text-foreground/75 mt-1.5">{t("home.stats.always_free")}</div>
             </div>
           </div>
         </div>
       </section>
 
       {/* SECTION 2: FEATURED VIDEO SPOTLIGHT */}
-      {topFeatured && (
+      {loading ? (
+        <section className="py-16 border-y border-border/60 bg-secondary/20">
+          <div className="container mx-auto px-4">
+            <div className="h-72 rounded-2xl bg-card/40 border border-border animate-pulse" />
+          </div>
+        </section>
+      ) : heroVideo ? (
         <section className="py-16 border-y border-border/60 bg-secondary/20">
           <div className="container mx-auto px-4">
             <div className="flex flex-col md:flex-row items-start md:items-end justify-between mb-10 gap-4">
@@ -158,48 +172,50 @@ const Index = () => {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
               {/* Main Player Preview */}
               <div className="lg:col-span-8">
-                <VideoPlayer videoId={topFeatured.youtubeVideoId} title={topFeatured.title} />
+                <VideoPlayer videoId={heroVideo.youtubeVideoId} title={heroVideo.title} />
               </div>
 
               {/* Spotlight Info */}
               <div className="lg:col-span-4 space-y-6">
                 <div className="flex items-center gap-2">
                   <Badge variant="secondary" className="font-semibold text-xs">
-                    {topFeatured.category}
+                    {heroVideo.category}
                   </Badge>
                   <span className="text-xs text-muted-foreground font-mono">
-                    {topFeatured.duration}
+                    {heroVideo.duration}
                   </span>
                 </div>
 
                 <h3 className="text-2xl font-bold text-foreground leading-snug">
-                  {topFeatured.title}
+                  {heroVideo.title}
                 </h3>
 
                 <p className="text-muted-foreground text-sm leading-relaxed">
-                  {topFeatured.description}
+                  {heroVideo.description}
                 </p>
 
-                <div className="flex flex-wrap gap-1.5 pt-2">
-                  {topFeatured.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="text-xs font-mono px-2 py-0.5 rounded bg-secondary text-secondary-foreground"
-                    >
-                      #{tag}
-                    </span>
-                  ))}
-                </div>
+                {heroVideo.tags && heroVideo.tags.length > 0 && (
+                  <div className="flex flex-wrap gap-1.5 pt-2">
+                    {heroVideo.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="text-xs font-mono px-2 py-0.5 rounded bg-secondary text-secondary-foreground"
+                      >
+                        #{tag}
+                      </span>
+                    ))}
+                  </div>
+                )}
 
                 <div className="pt-4 flex flex-col sm:flex-row gap-3">
                   <Button asChild className="w-full sm:w-auto">
-                    <Link to={`/videos/${topFeatured.slug}`}>
+                    <Link to={`/videos/${heroVideo.slug}`}>
                       {t("home.spotlight.view_details")}
                     </Link>
                   </Button>
                   <Button asChild variant="outline" className="w-full sm:w-auto gap-2">
                     <a
-                      href={topFeatured.youtubeUrl}
+                      href={heroVideo.youtubeUrl}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -212,7 +228,7 @@ const Index = () => {
             </div>
           </div>
         </section>
-      )}
+      ) : null}
 
       {/* SECTION 3: LATEST VIDEOS */}
       <section className="py-20">
@@ -233,19 +249,37 @@ const Index = () => {
             </Button>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {latestVideos.map((video) => (
-              <VideoCard key={video.id} video={video} />
-            ))}
-          </div>
+          {loading ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {Array.from({ length: 6 }).map((_, i) => (
+                <div key={i} className="h-64 rounded-2xl bg-card border border-border animate-pulse" />
+              ))}
+            </div>
+          ) : latestVideos.length > 0 ? (
+            <>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {latestVideos.map((video) => (
+                  <VideoCard key={video.id} video={video} />
+                ))}
+              </div>
 
-          <div className="mt-12 text-center">
-            <Button asChild size="lg" variant="outline" className="rounded-xl px-8">
-              <Link to="/videos">
-                {t("home.recent.browse_complete", { count: allVideos.length })}
-              </Link>
-            </Button>
-          </div>
+              <div className="mt-12 text-center">
+                <Button asChild size="lg" variant="outline" className="rounded-xl px-8">
+                  <Link to="/videos">
+                    {t("home.recent.browse_complete", { count: latestVideos.length })}
+                  </Link>
+                </Button>
+              </div>
+            </>
+          ) : (
+            <NoContentCard
+              icon={VideoIcon}
+              title={t("common.no_videos_title")}
+              description={t("common.no_videos_desc")}
+              actionLabel={t("common.browse_videos")}
+              actionLink="/videos"
+            />
+          )}
         </div>
       </section>
 
@@ -264,31 +298,44 @@ const Index = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {categories.map((category) => (
-              <Link
-                key={category.id}
-                to={`/videos?category=${encodeURIComponent(category.name)}`}
-                className="group p-6 rounded-2xl bg-card border border-border/70 hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 flex flex-col justify-between"
-              >
-                <div>
-                  <div className="w-10 h-10 rounded-xl bg-secondary flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                    {getCategoryIcon(category.slug)}
+          {loading ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              {Array.from({ length: 4 }).map((_, i) => (
+                <div key={i} className="h-44 rounded-2xl bg-card border border-border animate-pulse" />
+              ))}
+            </div>
+          ) : categories.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              {categories.map((category) => (
+                <Link
+                  key={category.id}
+                  to={`/videos?category=${encodeURIComponent(category.slug || category.name)}`}
+                  className="group p-6 rounded-2xl bg-card border border-border/70 hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 flex flex-col justify-between"
+                >
+                  <div>
+                    <div className="w-10 h-10 rounded-xl bg-secondary flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                      {getCategoryIcon(category.iconName)}
+                    </div>
+                    <h3 className="font-bold text-lg text-foreground mb-2 group-hover:text-primary transition-colors">
+                      {category.name}
+                    </h3>
+                    <p className="text-xs text-muted-foreground line-clamp-2 leading-relaxed">
+                      {category.description}
+                    </p>
                   </div>
-                  <h3 className="font-bold text-lg text-foreground mb-2 group-hover:text-primary transition-colors">
-                    {category.name}
-                  </h3>
-                  <p className="text-xs text-muted-foreground line-clamp-2 leading-relaxed">
-                    {category.description}
-                  </p>
-                </div>
-                <div className="mt-4 pt-3 border-t border-border/40 flex items-center justify-between text-xs font-semibold text-primary">
-                  <span>{t("home.topics.explore")}</span>
-                  <ArrowRight className="w-3.5 h-3.5 transform group-hover:translate-x-1 rtl:group-hover:-translate-x-1 transition-transform" />
-                </div>
-              </Link>
-            ))}
-          </div>
+                  <div className="mt-4 pt-3 border-t border-border/40 flex items-center justify-between text-xs font-semibold text-primary">
+                    <span>{t("home.topics.explore")}</span>
+                    <ArrowRight className="w-3.5 h-3.5 transform group-hover:translate-x-1 rtl:group-hover:-translate-x-1 transition-transform" />
+                  </div>
+                </Link>
+              ))}
+            </div>
+          ) : (
+            <NoContentCard
+              title={t("common.no_categories_title")}
+              description={t("common.no_categories_desc")}
+            />
+          )}
         </div>
       </section>
 
@@ -354,20 +401,24 @@ const Index = () => {
                   <span className="w-3 h-3 rounded-full bg-red-500/80" />
                   <span className="w-3 h-3 rounded-full bg-amber-500/80" />
                   <span className="w-3 h-3 rounded-full bg-emerald-500/80" />
-                  <span className="ml-2 text-xs">ModelStrictness.php</span>
+                  <span className="ml-2 text-xs">{homeData?.code_box?.file_name || "ModelStrictness.php"}</span>
                 </div>
                 <pre className="text-muted-foreground leading-relaxed overflow-x-auto">
-                  <code className="text-foreground">
-                    <span className="text-purple-400">namespace</span> App\Providers;{"\n\n"}
-                    <span className="text-purple-400">use</span> Illuminate\Database\Eloquent\Model;{"\n\n"}
-                    <span className="text-blue-400">class</span> <span className="text-yellow-400">AppServiceProvider</span> {"\n"}
-                    &#123;{"\n"}
-                    {"  "}<span className="text-blue-400">public function</span> <span className="text-green-400">boot</span>(): <span className="text-blue-400">void</span>{"\n"}
-                    {"  "}&#123;{"\n"}
-                    {"    "}<span className="text-muted-foreground">// Catch N+1 queries & unfillables early!</span>{"\n"}
-                    {"    "}Model::<span className="text-green-400">shouldBeStrict</span>(! $this-&gt;app-&gt;isProduction());{"\n"}
-                    {"  "}&#125;{"\n"}
-                    &#125;
+                  <code className="text-foreground whitespace-pre">
+                    {homeData?.code_box?.code || (
+                      <>
+                        <span className="text-purple-400">namespace</span> App\Providers;{"\n\n"}
+                        <span className="text-purple-400">use</span> Illuminate\Database\Eloquent\Model;{"\n\n"}
+                        <span className="text-blue-400">class</span> <span className="text-yellow-400">AppServiceProvider</span> {"\n"}
+                        &#123;{"\n"}
+                        {"  "}<span className="text-blue-400">public function</span> <span className="text-green-400">boot</span>(): <span className="text-blue-400">void</span>{"\n"}
+                        {"  "}&#123;{"\n"}
+                        {"    "}<span className="text-muted-foreground">// Catch N+1 queries & unfillables early!</span>{"\n"}
+                        {"    "}Model::<span className="text-green-400">shouldBeStrict</span>(! $this-&gt;app-&gt;isProduction());{"\n"}
+                        {"  "}&#125;{"\n"}
+                        &#125;
+                      </>
+                    )}
                   </code>
                 </pre>
               </div>

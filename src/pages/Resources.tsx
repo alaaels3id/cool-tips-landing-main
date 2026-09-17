@@ -1,9 +1,11 @@
-import { useState, useMemo } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import AppLayout from "@/components/layout/AppLayout";
 import SEO from "@/components/seo/SEO";
 import ResourceCard from "@/components/resource/ResourceCard";
-import { resources } from "@/data/resources";
+import NoContentCard from "@/components/common/NoContentCard";
+import { apiClient } from "@/lib/apiClient";
+import { Resource } from "@/types";
 import { BookOpen, Search, Github, ExternalLink } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -11,7 +13,9 @@ import { Button } from "@/components/ui/button";
 const technologies = ["All", "Laravel", "PHP", "MySQL", "APIs & Webhooks", "Developer Tools"];
 
 export const Resources = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const [resourcesList, setResourcesList] = useState<Resource[]>([]);
+  const [loading, setLoading] = useState(true);
   const [selectedTech, setSelectedTech] = useState("All");
   const [selectedType, setSelectedType] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
@@ -24,23 +28,53 @@ export const Resources = () => {
     { label: t("resources.type_docs"), value: "docs" },
   ];
 
+  useEffect(() => {
+    let isMounted = true;
+    setLoading(true);
+
+    apiClient
+      .getResources()
+      .then((data) => {
+        if (isMounted) {
+          setResourcesList(data);
+          setLoading(false);
+        }
+      })
+      .catch(() => {
+        if (isMounted) {
+          setResourcesList([]);
+          setLoading(false);
+        }
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, [i18n.language]);
+
   const filteredResources = useMemo(() => {
-    return resources.filter((res) => {
+    return resourcesList.filter((res) => {
       const matchTech =
         selectedTech === "All" ||
-        res.technology.toLowerCase() === selectedTech.toLowerCase();
+        res.technology?.toLowerCase() === selectedTech.toLowerCase();
       const matchType =
         selectedType === "all" ||
-        res.type.toLowerCase() === selectedType.toLowerCase();
+        res.type?.toLowerCase() === selectedType.toLowerCase();
       const matchSearch =
         !searchQuery.trim() ||
-        res.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        res.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        res.technology.toLowerCase().includes(searchQuery.toLowerCase());
+        res.title?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        res.description?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        res.technology?.toLowerCase().includes(searchQuery.toLowerCase());
 
       return matchTech && matchType && matchSearch;
     });
-  }, [selectedTech, selectedType, searchQuery]);
+  }, [resourcesList, selectedTech, selectedType, searchQuery]);
+
+  const handleResetFilters = () => {
+    setSelectedTech("All");
+    setSelectedType("all");
+    setSearchQuery("");
+  };
 
   return (
     <AppLayout>
@@ -121,25 +155,22 @@ export const Resources = () => {
           </div>
         </div>
 
-        {/* Resource Cards Grid */}
-        {filteredResources.length === 0 ? (
-          <div className="text-center py-20 px-4 rounded-2xl bg-card/40 border border-border/80 max-w-md mx-auto my-12">
-            <BookOpen className="w-10 h-10 text-muted-foreground mx-auto mb-3" />
-            <h3 className="text-lg font-bold mb-1">{t("resources.empty_title")}</h3>
-            <p className="text-sm text-muted-foreground mb-4">
-              {t("resources.empty_desc")}
-            </p>
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => {
-                setSelectedTech("All");
-                setSelectedType("all");
-                setSearchQuery("");
-              }}
-            >
-              {t("resources.reset_filters")}
-            </Button>
+        {/* Resource Cards Grid or Empty State */}
+        {loading ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+            {Array.from({ length: 6 }).map((_, i) => (
+              <div key={i} className="h-64 rounded-2xl bg-card border border-border animate-pulse" />
+            ))}
+          </div>
+        ) : filteredResources.length === 0 ? (
+          <div className="mb-16">
+            <NoContentCard
+              icon={BookOpen}
+              title={t("common.no_resources_title")}
+              description={t("common.no_resources_desc")}
+              actionLabel={t("resources.reset_filters")}
+              onAction={handleResetFilters}
+            />
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">

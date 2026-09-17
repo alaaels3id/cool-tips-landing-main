@@ -1,20 +1,19 @@
 import { Playlist } from "@/types";
-import { playlists } from "@/data/playlists";
+import { apiClient } from "@/lib/apiClient";
 
 export interface IPlaylistRepository {
   getAll(): Promise<Playlist[]>;
   getBySlug(slug: string): Promise<Playlist | null>;
 }
 
-export class StaticPlaylistRepository implements IPlaylistRepository {
+export class ApiPlaylistRepository implements IPlaylistRepository {
   async getAll(): Promise<Playlist[]> {
-    return [...playlists];
+    return await apiClient.getPlaylists();
   }
 
   async getBySlug(slug: string): Promise<Playlist | null> {
-    const found = playlists.find((p) => p.slug === slug || p.id === slug);
-    return found || null;
+    return await apiClient.getPlaylist(slug);
   }
 }
 
-export const playlistRepository = new StaticPlaylistRepository();
+export const playlistRepository = new ApiPlaylistRepository();

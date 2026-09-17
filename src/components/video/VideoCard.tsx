@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Video } from "@/types";
-import { Play, Clock, Eye, Calendar } from "lucide-react";
+import { Play, Clock, Eye, Calendar, ListVideo } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 
 interface VideoCardProps {
@@ -48,14 +48,22 @@ export const VideoCard = ({ video }: VideoCardProps) => {
           <span>{video.duration}</span>
         </div>
 
-        {/* Category badge */}
-        <div className="absolute top-2.5 left-2.5 rtl:left-auto rtl:right-2.5 z-10">
+        {/* Category & Playlist badges */}
+        <div className="absolute top-2.5 left-2.5 rtl:left-auto rtl:right-2.5 z-10 flex flex-col gap-1 items-start">
           <Badge
             variant="secondary"
             className="bg-background/85 backdrop-blur-md text-foreground font-semibold text-xs border border-border/50"
           >
             {video.category}
           </Badge>
+          {video.playlist && (
+            <Badge
+              className="bg-primary/90 text-primary-foreground font-medium text-[10px] border-none shadow-sm flex items-center gap-1 max-w-[160px] truncate"
+            >
+              <ListVideo className="w-2.5 h-2.5 shrink-0" />
+              <span className="truncate">{video.playlist}</span>
+            </Badge>
+          )}
         </div>
       </Link>
 

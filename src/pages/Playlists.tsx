@@ -1,14 +1,43 @@
+import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import AppLayout from "@/components/layout/AppLayout";
 import SEO from "@/components/seo/SEO";
 import PlaylistCard from "@/components/playlist/PlaylistCard";
-import { playlists } from "@/data/playlists";
+import NoContentCard from "@/components/common/NoContentCard";
+import { playlistRepository } from "@/repositories/playlistRepository";
+import { Playlist } from "@/types";
 import { ListVideo, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { YouTubeIcon } from "@/components/common/YouTubeIcon";
 
 export const Playlists = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const [playlists, setPlaylists] = useState<Playlist[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    let isMounted = true;
+    setLoading(true);
+
+    playlistRepository
+      .getAll()
+      .then((data) => {
+        if (isMounted) {
+          setPlaylists(data);
+          setLoading(false);
+        }
+      })
+      .catch(() => {
+        if (isMounted) {
+          setPlaylists([]);
+          setLoading(false);
+        }
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, [i18n.language]);
 
   return (
     <AppLayout>
@@ -32,12 +61,30 @@ export const Playlists = () => {
           </p>
         </div>
 
-        {/* Playlists Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-          {playlists.map((playlist) => (
-            <PlaylistCard key={playlist.id} playlist={playlist} />
-          ))}
-        </div>
+        {/* Playlists Grid or Empty State */}
+        {loading ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+            {Array.from({ length: 6 }).map((_, i) => (
+              <div key={i} className="h-80 rounded-2xl bg-card border border-border animate-pulse" />
+            ))}
+          </div>
+        ) : playlists.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+            {playlists.map((playlist) => (
+              <PlaylistCard key={playlist.id} playlist={playlist} />
+            ))}
+          </div>
+        ) : (
+          <div className="mb-16">
+            <NoContentCard
+              icon={ListVideo}
+              title={t("common.no_playlists_title")}
+              description={t("common.no_playlists_desc")}
+              actionLabel={t("common.browse_videos")}
+              actionLink="/videos"
+            />
+          </div>
+        )}
 
         {/* YouTube Playlists Direct Banner */}
         <div className="p-8 md:p-12 rounded-3xl bg-gradient-to-r from-card via-secondary/40 to-card border border-border flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left rtl:md:text-right">

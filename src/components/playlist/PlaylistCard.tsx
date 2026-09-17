@@ -54,7 +54,7 @@ export const PlaylistCard = ({ playlist }: PlaylistCardProps) => {
         {/* Action Buttons */}
         <div className="flex items-center gap-3 pt-4 border-t border-border/60">
           <Button asChild variant="default" className="flex-1 gap-2">
-            <Link to={`/videos?search=${encodeURIComponent(playlist.tags[0] || playlist.title)}`}>
+            <Link to={`/videos?playlist=${encodeURIComponent(playlist.slug || playlist.id)}`}>
               <Play className="w-4 h-4 fill-current" />
               {t("playlists.explore_videos")}
             </Link>

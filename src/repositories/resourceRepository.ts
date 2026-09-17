@@ -1,5 +1,5 @@
 import { Resource } from "@/types";
-import { resources } from "@/data/resources";
+import { apiClient } from "@/lib/apiClient";
 
 export interface IResourceRepository {
   getAll(): Promise<Resource[]>;
@@ -7,24 +7,18 @@ export interface IResourceRepository {
   getByType(type: string): Promise<Resource[]>;
 }
 
-export class StaticResourceRepository implements IResourceRepository {
+export class ApiResourceRepository implements IResourceRepository {
   async getAll(): Promise<Resource[]> {
-    return [...resources];
+    return await apiClient.getResources();
   }
 
   async getByTechnology(technology: string): Promise<Resource[]> {
-    if (technology.toLowerCase() === "all") return [...resources];
-    return resources.filter(
-      (r) => r.technology.toLowerCase() === technology.toLowerCase()
-    );
+    return await apiClient.getResources({ technology });
   }
 
   async getByType(type: string): Promise<Resource[]> {
-    if (type.toLowerCase() === "all") return [...resources];
-    return resources.filter(
-      (r) => r.type.toLowerCase() === type.toLowerCase()
-    );
+    return await apiClient.getResources({ type });
   }
 }
 
-export const resourceRepository = new StaticResourceRepository();
+export const resourceRepository = new ApiResourceRepository();

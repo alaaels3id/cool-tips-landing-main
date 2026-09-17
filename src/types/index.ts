@@ -7,6 +7,9 @@ export interface Video {
   youtubeUrl: string;
   youtubeVideoId: string;
   category: string;
+  category_id?: number | string;
+  playlist?: string;
+  playlist_id?: number | string | null;
   tags: string[];
   publishedAt: string;
   duration: string;
@@ -38,6 +41,7 @@ export interface Playlist {
   youtubeUrl: string;
   tags: string[];
   featured?: boolean;
+  videos?: Video[];
 }
 
 export interface Resource {
